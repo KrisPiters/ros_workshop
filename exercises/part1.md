@@ -25,15 +25,15 @@ Some commonly used Linux commands if you work with ROS:
 
 If all goes well, you have the [Kinetic version of ROS installed in Ubuntu](http://wiki.ros.org/kinetic/Installation/Ubuntu). Open a new terminal window and enter the following command to check your ROS version:
 
-    rosversion -d
+    rosversion -d
     
 Update Ubuntu and ROS as follows:
 
-    sudo apt-get update && sudo apt-get -y upgrade
+    sudo apt-get update && sudo apt-get -y upgrade
 
 Now install `git`, a version management tool and for downloading ROS projects; [GitHub](https://github.com/):
 
-    sudo apt-get -y install git
+    sudo apt-get -y install git
 
 You are now ready to start your ROS exercises.
 
@@ -42,34 +42,34 @@ You are now ready to start your ROS exercises.
 When installing ROS you'll automatically have a nice number of standard packages installed. Often you want to create new packages yourself or reuse packages by others. You therefore need a so-called *workspace* where you can create or download and build those packages
 
 Create a [ROS workspace](http://wiki.ros.org/catkin/workspaces#Catkin_Workspaces), for example *catkin_ws* (but the name of the workspace is free to choose). If you don't have a workspace yet, you can create one as follows (example uses the default catkin_ws workspace name):
-
-    source /opt/ros/kinetic/setup.bash
+```
+source /opt/ros/kinetic/setup.bash
     
-    mkdir -p ~/catkin_ws/src
-    cd ~/catkin_ws/src
-    catkin_init_workspace
-    cd ~/catkin_ws
-    catkin_make
-
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src
+catkin_init_workspace
+cd ~/catkin_ws
+catkin_make
+```
 Make this workspace your default workspace (because you can have multiple workspaces):
 
-    source ~/catkin_ws/devel/setup.bash
+    source ~/catkin_ws/devel/setup.bash
 
 To have this command executed automatically in every new terminal window you open, you can add it to your *.bashrc* file as follows (It is in your home directory):
 
-    echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+    echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
 If you want to know the contents of your *.bashrc* file you can print the file to your terminal screen:
 
-    cat ~/.bashrc
+    cat ~/.bashrc
 
 You can also open this file in a text editor (Ubuntu default: gedit):
 
-    gedit ~/.bashrc
+    gedit ~/.bashrc
 
 This way you can see how the ROS environment variables are set:
 
-    env | grep ROS
+    env | grep ROS
 
 ## Downloaden en installeren van ROS packages
 
@@ -86,7 +86,7 @@ Waar is het geinstalleerd?
 Er zijn ook heel veel packages niet geinstalleerd, maar wel beschikbaar als binary download (zogenaamde debian packages). 
 Welke packages zijn er beschikbaar om je ROS installatie uit te breiden?
 
-     apt-cache search ros-indigo-
+    apt-cache search ros-indigo-
 
 Dat zijn er erg veel! Een overzicht kun je [hier](http://www.ros.org/browse/list.php) vinden.
 
