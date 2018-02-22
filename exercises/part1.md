@@ -1,6 +1,8 @@
-# Workshop "ROS voor Engineers" - deel 1
+# Workshop "ROS for Engineers" - part 1
 
-auteur: Eric Dortmans (e.dortmans@fontys.nl)
+author (dutch): Eric Dortmans (e.dortmans@fontys.nl)
+
+translation (english): Kris Piters (k.piters@fontys.nl)
 
 ## Handige tips voor je begint
 
