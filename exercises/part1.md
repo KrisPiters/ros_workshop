@@ -4,71 +4,72 @@ author (dutch): Eric Dortmans (e.dortmans@fontys.nl)
 
 translation (english): Kris Piters (k.piters@fontys.nl)
 
-## Handige tips voor je begint
 
-Je kunt een nieuw terminal window openen met de toetscombinatie: *CTRL-ALT-t*.
+## Helpful tips before you start
 
-Alle commando's ondersteunen *tab-completion*, d.w.z. zodra je de *TAB* toets indrukt probeert Ubuntu of ROS wat je al hebt ingetikt te completeren.
+You can open a new terminal window with the key combination: *CTRL-ALT-T*.
 
-Je kunt door eerder ingevoerde commando's heenlopen met behulp van de *pijltjes-toetsen*. Een eerder ingevoerd commando kun je aanpassen en/of opnieuw uitvoeren door het indrukken van de *ENTER* toets.
+All commands support *tab-completion*, that is, as soon as you press the *TAB* key, Ubuntu or ROS tries to complete what you have already typed.
 
-Je kunt een programma stoppen door in het betreffende terminal window *CTRL-c* te tikken. Je kunt ook het hele terminal window afsluiten.
+You can walk through previously entered commands using the *arrow keys*. A previously entered command can be modified and / or re-executed by pressing the *ENTER* key.
 
-Enkele veel gebruikte Linux commando's als je met ROS werkt:
+You can stop a program by tapping *CTRL-C* in the relevant terminal window. You can also close the entire terminal window.
 
-- *cd* of *cd ~* (ga naar je home directory)
-- *cd ~/catkin_ws* (ga naar de top van je workspace; hier moet zijn vaak om *catkin_make* te doen)
-- *cd ~/catkin_ws/src* (ga naar de src directory van je workspace; hier staan je packages)
+Some commonly used Linux commands if you work with ROS:
 
-## ROS installatie & update
+- *cd* or *cd ~* (go to your home directory)
+- *cd ~/catkin_ws* (go to the top of your workspace, here you have to do *catkin_make* to build your ros packages)
+- *cd ~/catkin_ws/src* (go to the src directory of your workspace, here are your packages)
 
-Als het goed is heb je de [Indigo versie van ROS geinstalleerd in Ubuntu](http://wiki.ros.org/indigo/Installation/Ubuntu). Open een nieuw terminal window en voer het volgende commando in om je ROS versie te checken:
+## ROS installation & update
 
-    rosversion -d
-    
-Actualiseer Ubuntu en ROS alsvogt:
+If all goes well, you have the [Kinetic version of ROS installed in Ubuntu](http://wiki.ros.org/kinetic/Installation/Ubuntu). Open a new terminal window and enter the following command to check your ROS version:
 
-    sudo apt-get update && sudo apt-get -y upgrade
+    rosversion -d
+    
+Update Ubuntu and ROS as follows:
 
-Installeer nu `git`, een handig tool voor versiebeheer en voor het downloaden van ROS projecten van [GitHub](https://github.com/):
+    sudo apt-get update && sudo apt-get -y upgrade
 
-    sudo apt-get -y install git
+Now install `git`, a version management tool and for downloading ROS projects; [GitHub](https://github.com/):
 
-Je bent nu klaar om je ROS oefeningen te beginnen.
+    sudo apt-get -y install git
 
-## Creeren van een ROS workspace
+You are now ready to start your ROS exercises.
 
-Bij het installeren van ROS heb ook je automatisch een aardig aantal standaard packages geinstalleerd. Vaak wil je echter zelf nieuwe packages aanmaken of packages van anderen hergebruiken. Je hebt daarom een zogenaamde *workspace* nodig waar je die packages dan in kunt maken of downloaden en bouwen
+## Creating a ROS workspace
 
-Creeer een [ROS workspace](http://wiki.ros.org/catkin/workspaces#Catkin_Workspaces), bijvoorbeeld *catkin_ws* (maar de naam van de workspace is vrij te kiezen). Zo kun je zo een workspace creeren, als je er nog geen hebt:
+When installing ROS you'll automatically have a nice number of standard packages installed. Often you want to create new packages yourself or reuse packages by others. You therefore need a so-called *workspace* where you can create or download and build those packages
 
-    source /opt/ros/indigo/setup.bash
-    
-    mkdir -p ~/catkin_ws/src
-    cd ~/catkin_ws/src
-    catkin_init_workspace
-    cd ~/catkin_ws
-    catkin_make
+Create a [ROS workspace](http://wiki.ros.org/catkin/workspaces#Catkin_Workspaces), for example *catkin_ws* (but the name of the workspace is free to choose). If you don't have a workspace yet, you can create one as follows (example uses the default catkin_ws workspace name):
 
-Maak deze workspace nu je default workspace (want je kunt meerdere workspaces hebben):
+    source /opt/ros/kinetic/setup.bash
+    
+    mkdir -p ~/catkin_ws/src
+    cd ~/catkin_ws/src
+    catkin_init_workspace
+    cd ~/catkin_ws
+    catkin_make
 
-    source ~/catkin_ws/devel/setup.bash
+Make this workspace your default workspace (because you can have multiple workspaces):
 
-Om dit commando automatisch te laten uitvoeren in elk nieuw terminal window wat je opent, kun het alsvolgt toevoegen aan je *.bashrc* file. Die staat in je home directory:
+    source ~/catkin_ws/devel/setup.bash
 
-    echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+To have this command executed automatically in every new terminal window you open, you can add it to your *.bashrc* file as follows (It is in your home directory):
 
-Als je wilt weten wat er in je *.bashrc* file staat kun je die file op je scherm printen:
+    echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
-    cat ~/.bashrc
+If you want to know the contents of your *.bashrc* file you can print the file to your terminal screen:
 
-Je kunt deze file ook openen in een teksteditor (Ubuntu default: gedit):
+    cat ~/.bashrc
 
-    gedit ~/.bashrc
+You can also open this file in a text editor (Ubuntu default: gedit):
 
-Zo kun je kijken hoe de ROS omgevingsvariabelen zijn ingesteld:
+    gedit ~/.bashrc
 
-    env | grep ROS
+This way you can see how the ROS environment variables are set:
+
+    env | grep ROS
 
 ## Downloaden en installeren van ROS packages
 
