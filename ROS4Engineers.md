@@ -1,6 +1,7 @@
 # Workshop "ROS for Engineers"
 
 Author (NL): Eric Dortmans (e.dortmans@fontys.nl)
+
 Translation: Kris Piters (k.piters@fontys.nl)
 
 ## Learning goals
