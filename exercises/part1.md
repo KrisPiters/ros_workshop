@@ -70,6 +70,60 @@ You can also open this file in a text editor (Ubuntu default: gedit):
 This way you can see how the ROS environment variables are set:
 
     env | grep ROS
+    
+# Download and install ROS packages
+
+There are also a lot of standard packages installed when installing ROS. One of them is *turtlesim*, a 2D simulation package, made for educational purposes. Let's see if that package is indeed available.
+
+Is the package `turtlesim` installed?
+
+    rosversion turtlesim
+
+Where is it installed?
+
+    rospack find turtlesim
+
+Many packages aren't installed by default. They are available as a binary download (so-called debian packages).
+Which packages are available to extend your ROS installation?
+
+    apt-cache search ros-kinetic-
+
+There are a lot! You can find an overview [here](http://www.ros.org/browse/list.php).
+
+Let's download and install the package *arbotix_python*. We are not interested in the sources, but only want to install and use the package. Let's see if the relevant ROS package is available as a Debian (.deb) installation package. Which debian packages are there with the text *arbotix* in their name?
+
+    apt-cache search ros-- | grep arbotix
+
+Apparently the relevant Debian package is called ros-indigo-arbotix-python *. Now that we know this, installing is a breeze:
+
+    sudo apt-get install ros-indigo-arbotix-python
+
+Check whether it is successful:
+
+    rospack find arbotix_python
+
+As you can see, this package has been added to the ROS installation and not to your workspace.
+
+Sometimes we want to download ROS packages that are only available in source form, or whose sources we want to view and perhaps modify. We do not want to add these packages in binary form to our ROS installation, but download them in source form in our workspace.
+
+Let's download some handy ROS sample packages from GitHub in your workspace.
+
+    cd ~ / catkin_ws / src
+    git clone https://github.com/dortmans/ros_examples.git
+    cd ~ / catkin_ws
+    catkin_make
+
+If all goes well, ROS can now find those packages.
+
+    rospack find agitr
+    
+You can also go to the directory where that package is, for example to adjust:
+
+    roscd agitr
+
+And so you go back to your home directory:
+
+    CD
 
 ## Downloaden en installeren van ROS packages
 
