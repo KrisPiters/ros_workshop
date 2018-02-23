@@ -140,219 +140,117 @@ Open a new terminal window (ctrl-alt-t) and enter the following command:
 
     rosnode
 
-So you see what you can do with this command.
+Running the [rosnode](http://wiki.ros.org/rosnode) command without arguments will list all the possible arguments for the command.
 
 Check which nodes are running:
 
-    rosnode list
+    rosnode list
 
 Which topics have been created?
 
-    rostopic list
+    rostopic list
 
-View the ROS Graph:
+Take a look at the ROS Graph:
 
-    rqt_graph
+    rqt_graph
 
-Now we are going to view topics. There is also a command for:
+Now we are going look at topics using the [rostopic](http://wiki.ros.org/rostopic) command:
 
-    rostopic
+    rostopic
 
-On which topic is the node * listener * subscribed, i.e. to what topic does he listen?
+To which topic is the node *listener* subscribed, i.e. to which topic is it listening?
 
 What type of message can be published on this topic?
 
-    rostopic type * topic_name *
+    rostopic type *topic_name*
 
-What does such a type of message consist of?
+What does such a message type consist of?
 
-    rosmsg show * message_type *
+    rosmsg show *message_type*
 
-In Linux you can also pass the output of a command to the next command by means of a * pipe * sign (|).
+In Linux you can pass the output of a command to another command by means of a *pipe* sign (|):
 
-    rostopic type * topic_name * | rosmsg show
+    rostopic type *topic_name* | rosmsg show
 
-Try to manually publish a message on this topic:
+Try to manually publish a message to this topic:
 
-    rostopic pub * topic_name * * message_type * * message_content *
+    rostopic pub *topic_name* *message_type* *message_content*
 
-Tip: use the * TAB * key after typing the message type.
+Tip: use the *TAB* key after typing the message type.
 
-What happens now in the terminal where you started the * listener * node?
+What happened in the terminal where you started the *listener* node?
 
-ROS is made to control robots and not to make chat programs. In practice, messages are more complex and advertise and publish nodes on several topics. Moreover, nodes often have parameters and can be controlled via services, in addition to via messages. Now let's look at a more complex node, a 2D robot simulator.
+ROS is made to control robots and not to make chat programs. In practice, messages are more complex and nodes will advertise and publish on several topics. Moreover, nodes often have parameters and can be controlled via services in addition to messages via topics. Now let's take a look at a node that a little bit more complex: a 2D robot simulator.
 
-Start the node * turtlesim_node * from the package * turtlesim *
+Start the node *turtlesim_node* from the package *turtlesim*
 
-Which nodes are running now?
+Which nodes are running?
 
 Which topics have been created?
 
 View the ROS Computation Graph.
 
-On which topics is the node * turtlesim * subscribed? On which nodes does he publish?
+To which topics is the node *turtlesim* subscribed? To which topics does it publish?
 
-What type of message is published on the topic * / turtle1 / pose *
+What messagetype is published on the topic */turtle1/pose* ?
 
-With the rostopic command you can see much more. Use this command to address the following questions.
+With the rostopic command you can do much more. Use this command to address the following questions:
 
-What frequency (rate) is published on this topic?
+At which frequency (rate) are messages published to this topic?
 
-Check which messages are currently being published on this topic?
+Analyze the messages that are currently being published on this topic.
 
 What do you think the published data means?
 
-Which type of message is associated with the topic * / turtle1 / cmd_vel *?
+What type of message is associated with the topic */turtle1/cmd_vel*?
 
-What happens at the next command?
+What happens when using the following command?
 
-    rostopic pub -1 / turtle1 / cmd_vel geometry_msgs / Twist "{linear: {x: 2.0}}"
+    rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist "{linear: {x: 2.0}}"
     
 And what about this command?
 
-    rostopic pub -1 / turtle1 / cmd_vel geometry_msgs / Twist "{angular: {z: 1.57}}"
+    rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist "{angular: {z: 1.57}}"
 
 Draw a square with the turtle (approximately).
 
-What happens when we execute the following command?
-
-    rostopic pub -r 10 / turtle1 / cmd_vel geometry_msgs / Twist "{linear: {x: 2.0}, angular: {z: 1.8}}"
-
-And what is the difference when you execute this command:
-    
-    rostopic pub -r 10 / turtle1 / cmd_vel geometry_msgs / Twist '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'
-      
-So far we have only used one application with a few node. In practice, an application will consist of several nodes. We have the turtle moved by ROS commands from the terminal. That is enough to test the node but of course not an integrated application. Suppose we want to control the turtle with the arrow keys of the keyboard. Then another node must start up, namely one that converts input from the keyboard into control commands
-
-Start the * turtle_teleop_key * node from the package * turtlesim * from a new terminal window. You now know how to do that.
-
-Look in the computation graph how the * turtle_teleop_key * node is linked to the * turtlesim_node *:
-
-View * rostopic echo * which messages * turtle_teleop_key * publish when you press a certain arrow key.
-
-## nodes, topics, messages
-
-Start de node *listener* uit het package *beginner_tutorials*
-
-    rosrun beginner_tutorials listener
-
-Waarom werkt het niet? Hoe los je dat op?
-
-Open een nieuw terminal window (ctrl-alt-t) en voer het volgende commando in:
-
-    rosnode
-
-Zo zie je wat je allemaal met dit commando kunt doen.
-
-Kijk welke nodes er nu draaien:
-
-    rosnode list
-
-Welke topics zijn er aangemaakt?
-
-    rostopic list
-
-Bekijk de ROS Graph:
-
-    rqt_graph
-
-Nu gaan we topics bekijken. Daar is ook een commando voor:
-
-    rostopic
-
-Op welk topic is de node *listener* geabonneerd, d.w.z. naar welk topic luistert hij?
-
-Welk type message mag er op dit topic gepubliceerd worden?
-
-    rostopic type *topic_naam*
-
-Waaruit bestaat zo'n type message?
-
-    rosmsg show *message_type*
-
-Je kunt in Linux ook de output van een commando doorgeven aan het volgende commando door middel van een *pipe* teken (|).
-
-    rostopic type *topic_naam* | rosmsg show
-
-Probeer handmatig een message op dit topic te publiceren:
-
-    rostopic pub *topic_naam* *message_type* *message_inhoud*
-
-Tip: gebruik de *TAB*-toets na het intikken van het message type.
-
-Wat gebeurt er nu in het terminal waar je de *listener* node hebt opgestart?
-
-ROS is gemaakt om robots te besturen en niet om chat programma's te maken. In de praktijk zijn messages complexer en adverteren en publiceren nodes op meerder topics. Bovendien hebben nodes vaak parameters en kunnen ze behalve via messages ook via services aangestuurd worden. Laten we daarnu eens een meer complexe node bekijken, een 2D robot simulator.
-
-Start de node *turtlesim_node* uit het package *turtlesim*
-
-Welke nodes draaien er nu?
-
-Welke topics zijn er aangemaakt?
-
-Bekijk de ROS Computation Graph.
-
-Op welke topics is de node *turtlesim* geabonneerd? Op welke nodes publiceert hij?
-
-Welk type message wordt er gepubliceerd op het topic */turtle1/pose*
-
-Met het rostopic commando kun je nog veel meer bekijken. Gebruik dit commando om de volgende vragen te benatwoorden.
-
-Met welke frequentie (rate) wordt op dit topic gepubliceerd?
-
-Kijk eens welke messages er momenteel gepubliceerd worden op dit topic?
-
-Wat denk je dat de gepubliceerde data betekent?
-
-Welk type message is geassocieerd met het topic */turtle1/cmd_vel*?
-
-Wat gebeurt er bij het volgende commando?
-
-    rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist "{linear: {x: 2.0}}"
-    
-En wat bij dit commando?
-
-    rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist "{angular: {z: 1.57}}"
-
-Teken met de turtle (ongeveer) een vierkant.
-
-Wat gebeurt er als we het volgende commando uitvoeren?
+What happens when you execute the following command?
 
     rostopic pub -r 10 /turtle1/cmd_vel geometry_msgs/Twist "{linear: {x: 2.0}, angular: {z: 1.8}}"
 
-En wat is het verschil als je dit commando uitvoert:
-    
-    rostopic pub -r 10 /turtle1/cmd_vel geometry_msgs/Twist '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'
-      
-Tot nu toe hebben we slechts een applicatie met enkele node gebruikt. In de praktijk zal een applicatie uit meerdere nodes bestaan. We hebben de turtle laten bewegen door ROS commando's vanuit de terminal. Dat is genoeg om de node te testen maar natuurlijk geen geintegreerde applicatie. Stel we willen de turtle kunnen besturen met de pijltjestoetsen van het toetsenbord. Dan moeten nog een node opstarten, namelijk een die input van het toetsenbord omzet in besturingscommando's 
+How does it compare to this command:
+    
+    rostopic pub -r 10 /turtle1/cmd_vel geometry_msgs/Twist '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'
+      
+So far we have only used one application with only one node. In practice, an application will consist of several nodes. We have moved the turtle using ROS commands from the terminal. That is enough to test the node, but of course it is not an integrated application. Suppose we want to control the turtle with the arrow keys of the keyboard. For this we will use another node that will convert input from the keyboard into control commands for the turtle.
 
-Start daarom vanuit een nieuw terminal window de *turtle_teleop_key* node uit het package *turtlesim*. Je weet nu vast hoe dat moet.
+Use a new terminal to start the *turtle_teleop_key* node from the *turtlesim* package. You will probably know how to do that by now.
 
-Kijk in de computation graph hoe de *turtle_teleop_key* node gekoppeld is aan de *turtlesim_node*:
+Use the computation graph to see how the *turtle_teleop_key* node is linked to the *turtlesim_node*:
 
-Bekijk met behulp van *rostopic echo* welke messages *turtle_teleop_key* publiceert als je een bepaalde pijltjestoets indrukt.
+Try using *rostopic echo* to analyze the messages that are being published by *turtle_teleop_key* when you press a certain arrow key.
 
 ## services
 
-Nodes wisselen niet alleen informatie uit via topics. Een node can ook een dienst (service) van een andere node aanroepen. Vanuit een terminal window kunnen we zo'n service testen met behulp van het *rosservice* commando.
+Topics arent the only way for nodes to exchange information. A node can also call a service offered by another node (or offer a service itself). We can test a service from a terminal by using the [rosservice](http://wiki.ros.org/rosservice) command.
 
-Welke services biedt de node *turtlesim*? 
+Which services are offered by the *turtlesim* node? 
 
     rosservice list
 
-Welke argumenten heeft de set_pen service?
+What are the arguments for the set_pen service?
 
     rosservice args /turtle1/set_pen
 
-In meer detail:
+For more detail:
 
     rosservice type /turtle1/set_pen | rossrv show
 
-Roep de set_pen service aan (met *rosservice call*) om de pen van de turtle rood te maken.
+Call the set_pen service (using *rosservice call*) to change the color of the pen to red.
 
-Beweeg de turtle om te kijken of het werkt.
+Move the turtle to see if it has worked.
 
-Zet de pen uit. Beweeg de turtle om te kijken of het werkt.
+Disable the pen; move the turtle to see if it worked.
 
 Reset turtlesim:
 
@@ -360,37 +258,37 @@ Reset turtlesim:
 
 ## parameters
 
-Nodes kunnen ook parameters lezen. Die parameters moeten dan wel gepubliceerd zijn voor het opstarten van de node. Dat gebeurt meestal in opstartscripts (launch files).
+Nodes can also read parameters. These parameters have to be published before starting the node, this usually happens by using startup scripts ([launch files](http://wiki.ros.org/roslaunch)).
 
-Welke parameters zijn er momenteel gedefinieerd?
+Which parameters are currently defined?
 
     rosparam list
 
-Dump alle parameters in YAML formaat in een file
+Dump all the parameters to a file in YAML format:
 
     rosparam dump dump.yaml
 
-Late we die file eens bekijken:
+Let's take a look at that file:
 
     cat dump.yaml
 
-Verander de waarde van parameter /background_b
+Change the value of the parameter */background_b*
    
     rosparam set /background_b 0
 
-Clear de turtlesim node zodat de parameters opnieuw ingelezen worden
+Clear the turtlesim node so the parameters will be reread:
 
     rosservice call /clear
 
-Maak nu een nieuw turtle aan:
+Add a new turtle to the sim:
    
     rosservice call /spawn 2 2 1.57 "r2d2"
 
-Welke topics zijn er nu?
+Which topics are available after doing this?
 
     rostopic list
 
-Laat die nieuwe turtle bewegen.
+Make the new new turtle move.
 
 ## Opnemen en afspelen van messages
 
