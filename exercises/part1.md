@@ -90,11 +90,17 @@ Which packages are available to extend your ROS installation?
 
 There are a lot! You can find an overview [here](http://www.ros.org/browse/list.php).
 
+```
+NOT AVAILABLE FOR ROS KINETIC
+TODO: change to different package for this tutorial
+
 Let's download and install the package *arbotix_python*. We are not interested in the sources, but only want to install and use the package. Let's see if the relevant ROS package is available as a Debian (.deb) installation package. Which debian packages are there with the text *arbotix* in their name?
 
-    apt-cache search ros-- | grep arbotix
 
-Apparently the relevant Debian package is called ros-indigo-arbotix-python *. Now that we know this, installing is a breeze:
+    apt-cache search ros-ki- | grep arbotix
+
+
+Apparently the relevant Debian package is called *ros-indigo-arbotix-python*. Now that we know this, installing is a breeze:
 
     sudo apt-get install ros-indigo-arbotix-python
 
@@ -105,79 +111,124 @@ Check whether it is successful:
 As you can see, this package has been added to the ROS installation and not to your workspace.
 
 Sometimes we want to download ROS packages that are only available in source form, or whose sources we want to view and perhaps modify. We do not want to add these packages in binary form to our ROS installation, but download them in source form in our workspace.
+```
 
-Let's download some handy ROS sample packages from GitHub in your workspace.
-
-    cd ~ / catkin_ws / src
+Let's download some helpful ROS sample packages from GitHub to your workspace.
+```
+    cd ~/catkin_ws/src
     git clone https://github.com/dortmans/ros_examples.git
-    cd ~ / catkin_ws
+    cd ~/catkin_ws
     catkin_make
-
-If all goes well, ROS can now find those packages.
-
-    rospack find agitr
-    
-You can also go to the directory where that package is, for example to adjust:
-
-    roscd agitr
-
-And so you go back to your home directory:
-
-    CD
-
-## Downloaden en installeren van ROS packages
-
-Er zijn bij installatie van ROS ook een heleboel standaard packages geinstalleerd. Een daarvan is *turtlesim*, een 2D simulatie package, gemaakt voor educatieve doeleinden. Laten we eens kijken of dat package inderdaad beschikbaar is.
-
-Is het package `turtlesim` geinstalleerd?
-
-    rosversion turtlesim
-
-Waar is het geinstalleerd?
-
-    rospack find turtlesim
-
-Er zijn ook heel veel packages niet geinstalleerd, maar wel beschikbaar als binary download (zogenaamde debian packages). 
-Welke packages zijn er beschikbaar om je ROS installatie uit te breiden?
-
-    apt-cache search ros-indigo-
-
-Dat zijn er erg veel! Een overzicht kun je [hier](http://www.ros.org/browse/list.php) vinden.
-
-Laten we het package *arbotix_python* downloaden en installeren. We zijn niet geinteresseerd in de sources, maar willen alleen het package installeren en gebruiken. Laten we kijken of het betreffende ROS package beschikbaar is als Debian (.deb) installatiepakket. Welke debian packages zijn er met de tekst *arbotix* in hun naam?
-
-    apt-cache search ros-indigo- | grep arbotix
-
-Blijkbaar heet het betreffende Debian pakket *ros-indigo-arbotix-python*. Nu we dit weten is installeren een koud kunstje:
-
-    sudo apt-get install ros-indigo-arbotix-python
-
-Checken of het is gelukt:
-
-    rospack find arbotix_python
-
-Zoals je ziet is dit pakket toegevoegd aan de ROS installatie en niet aan je workspace.
-
-Soms willen we ROS packages downloaden die alleen in source vorm beschikbaar, of waarvan we de sources willen bekijken en wellicht aanpassen.  Die packages willen we niet in binaire vorm toevoegen aan onze ROS installatie, maar downloaden in source vorm in onze workspace.
-
-Laten we wat handige ROS voorbeeld packages van GitHub downloaden in je workspace.
-
-    cd ~/catkin_ws/src
-    git clone https://github.com/dortmans/ros_examples.git
-    cd ~/catkin_ws
-    catkin_make
-
-Als het goed is kan ROS die packages nu vinden.
+```
+If all goes well, ROS can find those packages.
 
     rospack find agitr
-    
-Je kunt ook naar de directory gaan waar dat package staat, bijvoorbeeld om wat aan te passen:
+    
+You can also go to the directory of the package using [roscd](http://wiki.ros.org/rosbash#roscd), for example to make changes:
 
     roscd agitr
+    
+## nodes, topics, messages
 
-En zo ga je weer terug naar je homedirectory:
+Start the node *listener* from the package *beginner_tutorials*
 
-    cd
+    rosrun beginner_tutorials listener
+
+Why doesn't it work? How can you solve that?
+
+Open a new terminal window (ctrl-alt-t) and enter the following command:
+
+    rosnode
+
+So you see what you can do with this command.
+
+Check which nodes are running:
+
+    rosnode list
+
+Which topics have been created?
+
+    rostopic list
+
+View the ROS Graph:
+
+    rqt_graph
+
+Now we are going to view topics. There is also a command for:
+
+    rostopic
+
+On which topic is the node * listener * subscribed, i.e. to what topic does he listen?
+
+What type of message can be published on this topic?
+
+    rostopic type * topic_name *
+
+What does such a type of message consist of?
+
+    rosmsg show * message_type *
+
+In Linux you can also pass the output of a command to the next command by means of a * pipe * sign (|).
+
+    rostopic type * topic_name * | rosmsg show
+
+Try to manually publish a message on this topic:
+
+    rostopic pub * topic_name * * message_type * * message_content *
+
+Tip: use the * TAB * key after typing the message type.
+
+What happens now in the terminal where you started the * listener * node?
+
+ROS is made to control robots and not to make chat programs. In practice, messages are more complex and advertise and publish nodes on several topics. Moreover, nodes often have parameters and can be controlled via services, in addition to via messages. Now let's look at a more complex node, a 2D robot simulator.
+
+Start the node * turtlesim_node * from the package * turtlesim *
+
+Which nodes are running now?
+
+Which topics have been created?
+
+View the ROS Computation Graph.
+
+On which topics is the node * turtlesim * subscribed? On which nodes does he publish?
+
+What type of message is published on the topic * / turtle1 / pose *
+
+With the rostopic command you can see much more. Use this command to address the following questions.
+
+What frequency (rate) is published on this topic?
+
+Check which messages are currently being published on this topic?
+
+What do you think the published data means?
+
+Which type of message is associated with the topic * / turtle1 / cmd_vel *?
+
+What happens at the next command?
+
+    rostopic pub -1 / turtle1 / cmd_vel geometry_msgs / Twist "{linear: {x: 2.0}}"
+    
+And what about this command?
+
+    rostopic pub -1 / turtle1 / cmd_vel geometry_msgs / Twist "{angular: {z: 1.57}}"
+
+Draw a square with the turtle (approximately).
+
+What happens when we execute the following command?
+
+    rostopic pub -r 10 / turtle1 / cmd_vel geometry_msgs / Twist "{linear: {x: 2.0}, angular: {z: 1.8}}"
+
+And what is the difference when you execute this command:
+    
+    rostopic pub -r 10 / turtle1 / cmd_vel geometry_msgs / Twist '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'
+      
+So far we have only used one application with a few node. In practice, an application will consist of several nodes. We have the turtle moved by ROS commands from the terminal. That is enough to test the node but of course not an integrated application. Suppose we want to control the turtle with the arrow keys of the keyboard. Then another node must start up, namely one that converts input from the keyboard into control commands
+
+Start the * turtle_teleop_key * node from the package * turtlesim * from a new terminal window. You now know how to do that.
+
+Look in the computation graph how the * turtle_teleop_key * node is linked to the * turtlesim_node *:
+
+View * rostopic echo * which messages * turtle_teleop_key * publish when you press a certain arrow key.
 
 ## nodes, topics, messages
 
