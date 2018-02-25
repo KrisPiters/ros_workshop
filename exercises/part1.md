@@ -11,11 +11,13 @@ You can open a new terminal window with the key combination: *CTRL-ALT-T*.
 
 All commands support *tab-completion*, that is, as soon as you press the *TAB* key, Ubuntu or ROS tries to complete what you have already typed.
 
-You can walk through previously entered commands using the *arrow keys*. A previously entered command can be modified and / or re-executed by pressing the *ENTER* key.
+You can walk through previously entered commands using the *arrow keys*. A previously entered command can be modified and/or re-executed by pressing the *ENTER* key.
 
-You can stop a program by tapping *CTRL-C* in the relevant terminal window. You can also close the entire terminal window.
+You can stop a program by tapping *CTRL-C* in the relevant terminal window or close the entire terminal window.
 
-Some commonly used Linux commands if you work with ROS:
+Copy-pasting text from and to a terminal can be done using *CTRL-SHIFT-C* and *CTRL-SHIFT-V*.
+
+Some commonly used Linux commands when working with ROS:
 
 - *cd* or *cd ~* (go to your home directory)
 - *cd ~/catkin_ws* (go to the top of your workspace, here you have to do *catkin_make* to build your ros packages)
@@ -23,15 +25,15 @@ Some commonly used Linux commands if you work with ROS:
 
 ## ROS installation & update
 
-If all goes well, you have the [Kinetic version of ROS installed in Ubuntu](http://wiki.ros.org/kinetic/Installation/Ubuntu). Open a new terminal window and enter the following command to check your ROS version:
+If all went well, you'll have the [Kinetic](http://wiki.ros.org/kinetic/Installation/Ubuntu) version of ROS installed in Ubuntu. Open a new terminal window and enter the following command to check your ROS version:
 
     rosversion -d
-    
+
 Update Ubuntu and ROS as follows:
 
     sudo apt-get update && sudo apt-get -y upgrade
 
-Now install `git`, a version management tool and for downloading ROS projects; [GitHub](https://github.com/):
+Now install `git`, a version management tool used for downloading ROS projects ([GitHub](https://github.com/)):
 
     sudo apt-get -y install git
 
@@ -39,9 +41,9 @@ You are now ready to start your ROS exercises.
 
 ## Creating a ROS workspace
 
-When installing ROS you'll automatically have a nice number of standard packages installed. Often you want to create new packages yourself or reuse packages by others. You therefore need a *workspace* where you can create or download and build those packages
+When installing ROS you'll automatically have a nice number of standard packages installed. Often you'd want to create new packages yourself or reuse packages by others. You therefore need a *workspace* for creating, downloading and building those packages
 
-Create a [ROS workspace](http://wiki.ros.org/catkin/workspaces#Catkin_Workspaces), for example *catkin_ws* (but the name of the workspace is free to choose). If you don't have a workspace yet, you can create one as follows (example uses the default catkin_ws workspace name):
+Create a [ROS workspace](http://wiki.ros.org/catkin/workspaces#Catkin_Workspaces), for example *catkin_ws* (the name of the workspace can be freely chosen but the examples and commands in this exercise assume the default catkin_ws). If you don't have a workspace yet, you can create one as follows:
 ```
 source /opt/ros/kinetic/setup.bash
     
@@ -55,11 +57,11 @@ Make this workspace your default workspace (because you can have multiple worksp
 
     source ~/catkin_ws/devel/setup.bash
 
-To have this command executed automatically in every new terminal window you open, you can add it to your *.bashrc* file as follows (It is in your home directory):
+To have this command executed automatically in every new terminal window you open, you can add it to your *.bashrc* file as follows (it is in your home directory):
 
     echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 
-If you want to know the contents of your *.bashrc* file you can print the file to your terminal screen:
+If you want to know the contents of your *.bashrc* file you can print the file to your terminal window:
 
     cat ~/.bashrc
 
@@ -67,13 +69,12 @@ You can also open this file in a text editor (Ubuntu default: gedit):
 
     gedit ~/.bashrc
 
-This way you can see how the ROS environment variables are set:
+To see the values of the ROS environment variables use:
 
     env | grep ROS
     
-## Download and install ROS packages
-
-There are also a lot of standard packages installed when installing ROS. One of them is *turtlesim*, a 2D simulation package, made for educational purposes. Let's see if that package is indeed available.
+## Downloading and installing ROS packages
+A lot of packages are installed by default when installing ROS. One of them is *turtlesim*, a 2D simulation package made for educational purposes. Let's see if that package is indeed available.
 
 Is the package `turtlesim` installed?
 
@@ -83,54 +84,52 @@ Where is it installed?
 
     rospack find turtlesim
 
-Many packages aren't installed by default. They are available as a binary download (so-called debian packages).
+Some packages aren't installed by default. They are available as a binary download (so-called debian packages).
+
 Which packages are available to extend your ROS installation?
 
     apt-cache search ros-kinetic-
 
-There are a lot! You can find an overview [here](http://www.ros.org/browse/list.php).
+There are a lot of them! You can find an overview [here](http://www.ros.org/browse/list.php).
 
-
-Let's download and install the package [*turtlebot-teleop*](http://wiki.ros.org/turtlebot_teleop) as an example. We are not interested in the sources, but only want to install and use the package. Let's see if the relevant ROS package is available as a Debian (.deb) installation package. Which debian packages are there with the text *turtlebot* in their name?
-
+Let's download and install the [*turtlebot-teleop*](http://wiki.ros.org/turtlebot_teleop) package as an example. Currently we are not interested in the sources, but only want to install and use the package. Let's see if the relevant ROS package is available as a Debian (.deb) installation package. Which debian packages are available with the text *turtlebot* in their name?
 
     apt-cache search ros-kinetic- | grep turtlebot
 
+Apparently the relevant Debian package is called *ros-kinetic-turtlebot-teleop*. Now that we know this, installing it is a breeze:
 
-Apparently the relevant Debian package is called *ros-kinetic-turtlebot-teleop*. Now that we know this, installing is a breeze:
+    sudo apt-get install ros-kinetic-turtlebot-teleop
 
-    sudo apt-get install ros-kinetic-turtlebot-teleop
+Check whether it was successfully installed:
 
-Check whether it was successful:
-
-    rospack find turtlebot-teleop
+    rospack find turtlebot-teleop
 
 As you can see, this package has been added to the ROS installation and not to your workspace.
 
-Sometimes we want to download ROS packages that are only available in source form, or whose sources we want to view and perhaps modify. We do not want to add these packages to our ROS installation in binary form, but download them in source form to our workspace.
+Sometimes we'd like to download ROS packages that are only available in source form, or whose sources we'd like to view and perhaps modify. We do not want to add these packages to our ROS installation in binary form, but download them in source form to our workspace.
 
-Let's download some helpful ROS sample packages from GitHub to your workspace.
+Let's download some helpful ROS sample packages from GitHub to your workspace:
 ```
     cd ~/catkin_ws/src
     git clone https://github.com/dortmans/ros_examples.git
     cd ~/catkin_ws
     catkin_make
 ```
-If all goes well, ROS can find those packages.
+If all goes well, ROS can find those packages:
 
     rospack find agitr
 
-You can also go to the directory of the package using [roscd](http://wiki.ros.org/rosbash#roscd), for example to make changes:
+You can also navigate to the directory of the package using [roscd](http://wiki.ros.org/rosbash#roscd)(to make changes for example):
 
     roscd agitr
     
 ## Nodes, topics, messages
 
-Start the node *listener* from the package *beginner_tutorials*
+Try starting the node *listener* from the package *beginner_tutorials*:
 
     rosrun beginner_tutorials listener
 
-Why doesn't it work? How can you solve that?
+Why doesn't it work? How can you fix it?
 
 Open a new terminal window (ctrl-alt-t) and enter the following command:
 
@@ -138,11 +137,11 @@ Open a new terminal window (ctrl-alt-t) and enter the following command:
 
 Running the [rosnode](http://wiki.ros.org/rosnode) command without arguments will list all the possible arguments for the command.
 
-Check which nodes are running:
+Check which **nodes** are running:
 
     rosnode list
 
-Which topics have been created?
+Which **topics** have been created?
 
     rostopic list
 
@@ -150,31 +149,31 @@ Take a look at the ROS Graph:
 
     rqt_graph
 
-Now we are going look at topics using the [rostopic](http://wiki.ros.org/rostopic) command:
+Next we are going to explore topics using the [rostopic](http://wiki.ros.org/rostopic) command:
 
     rostopic
 
-To which topic is the node *listener* subscribed, i.e. to which topic is it listening?
+To which topic is the *listener* node subscribed, i.e. to which topic is it listening?
 
-What type of message can be published on this topic?
+What kind of message can be published on this topic?
 
-    rostopic type *topic_name*
+    rostopic type <topic_name>
 
-What does such a message type consist of?
+What information is contained inside this message?
 
-    rosmsg show *message_type*
+    rosmsg show <message_type>
 
 In Linux you can pass the output of a command to another command by means of a *pipe* sign (|):
 
-    rostopic type *topic_name* | rosmsg show
+    rostopic type <topic_name> | rosmsg show
 
 Try to manually publish a message to this topic:
 
-    rostopic pub *topic_name* *message_type* *message_content*
+    rostopic pub <topic_name> <message_type> <message_content>
 
 Tip: use the *TAB* key after typing the message type.
 
-What happened in the terminal where you started the *listener* node?
+What happened in the terminal from where you started the *listener* node?
 
 ROS is made to control robots and not to make chat programs. In practice, messages are more complex and nodes will advertise and publish on several topics. Moreover, nodes often have parameters and can be controlled via services in addition to messages via topics. Now let's take a look at a node that a little bit more complex: a 2D robot simulator.
 
@@ -188,7 +187,7 @@ Analyse the ROS Computation Graph.
 
 - To which topics is the node *turtlesim* subscribed? To which topics does it publish?
 
-- What messagetype is published on the topic */turtle1/pose* ?
+- Which messagetype is published to the topic */turtle1/pose* ?
 
 With the rostopic command you can do much more. Use this command to address the following questions:
 
@@ -204,7 +203,7 @@ Analyze the messages that are currently being published on this topic.
 ```
 rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist "{linear: {x: 2.0}}"
 ```    
-And what about this command?
+- And what about this command?
 ```
 rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist "{angular: {z: 1.57}}"
 ```
@@ -214,11 +213,11 @@ Draw a square with the turtle (approximately).
 ```
 rostopic pub -r 10 /turtle1/cmd_vel geometry_msgs/Twist "{linear: {x: 2.0}, angular: {z: 1.8}}"
 ```
-- How does it compare to next command?
+- How does it compare to this command?
 ```    
 rostopic pub -r 10 /turtle1/cmd_vel geometry_msgs/Twist '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'
 ```
-So far we have only used one application with only one node. In practice, an application will consist of several nodes. We have moved the turtle using ROS commands from the terminal. That is enough to test the node, but of course it is not an integrated application. Suppose we want to control the turtle with the arrow keys of the keyboard. For this we will use another node that will convert input from the keyboard into control commands for the turtle.
+So far we only used one application with only one node. In practice, an application will consist of several nodes. We moved the turtle using ROS commands from the terminal. That is enough to test the node, but of course it is not an integrated application. Suppose we want to control the turtle with the arrow keys of the keyboard. We will use another node to make this possible. This new node will convert input from the keyboard into control commands for the turtle.
 
 Use a new terminal to start the *turtle_teleop_key* node from the *turtlesim* package. You will probably know how to do that by now.
 
@@ -228,7 +227,7 @@ Try using *rostopic echo* to analyze the messages that are being published by *t
 
 ## Services
 
-Topics arent the only way for nodes to exchange information. A node can also call a service offered by another node (or offer a service itself). We can test a service from a terminal by using the [rosservice](http://wiki.ros.org/rosservice) command.
+Topics aren't the only way for nodes to exchange information. A node can also call a service offered by another node (or offer a service itself). We can test a service from a terminal by using the [rosservice](http://wiki.ros.org/rosservice) command.
 
 Which services are offered by the *turtlesim* node? 
 
@@ -268,11 +267,11 @@ Let's take a look at that file:
 
     cat dump.yaml
 
-Change the value of the parameter */background_b*
+Change the value of the parameter *background_b*:
    
     rosparam set /background_b 0
 
-Clear the turtlesim node so the parameters will be reread:
+Clear the turtlesim node to make it reread the parameters:
 
     rosservice call /clear
 
@@ -288,7 +287,7 @@ Make the newly added turtle move.
 
 ## Recording and playing back messages
 
-Published messages can be recorded to a *bag* file. They can be played back at a later time. This is very useful for testing!
+Published messages can be recorded to a *bag* file. Bag files can be used to play back messages at a later time. This is very useful for testing!
 
 Let's start recording messages on the *turtle1/cmd_vel* topic using [rosbag](http://wiki.ros.org/rosbag):
 
@@ -329,7 +328,7 @@ Install a USB camera driver package ([usb_cam](http://wiki.ros.org/usb_cam)):
 
 This package contains a node for controlling the webcam.
 
-We also need a node that is able to read the images and show them on a screen. for this we will use the *image_view* node included in the [image_view](http://wiki.ros.org/image_view) package. This package should be installed by default.
+We also need a node that is able to read the images and show them on a screen. For this we will use the *image_view* node included in the [image_view](http://wiki.ros.org/image_view) package. This package should be installed by default.
 
 We want to be able to simultaneously start both nodes with their required parameters. Let's make a launch file to help us achieve this goal. First we'll create a new package that will contain our launch file. Let's call it *usb_camera*.
 
@@ -351,7 +350,7 @@ It's probably useful to open this directory with *Nautilus*:
 
     nautilus `rospack find usb_camera`/launch
     
-Create a new file named *usb_camera.launch* in the *launch* directory and give it the following content:
+Create a new file named *usb_camera.launch* in the *launch* directory and with the following content:
 
     <launch>
       <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
@@ -369,9 +368,9 @@ Create a new file named *usb_camera.launch* in the *launch* directory and give i
       </node>
     </launch>
 
-PS: usually the webcam device in Ubuntu is registered as */dev/video0*, but might also be */dev/video1*.  
+PS: Usually a webcam device is registered as */dev/video0* in Ubuntu, in some cases it might be numbered differently  eg:  */dev/video1*.  
 
-PPS: not every webcam is the same. You might have to change the *pixel_format* depending on the camera.
+PPS: Not every camera is the same. You might have to change the *pixel_format* depending on the camera.
 
 Test the launchfile:
 
@@ -381,22 +380,22 @@ Analyze the computation graph:
 
     rqt_graph
 
-What structural problem do you see? Hint: play around with rqt_graph's settings to get more information in your graph.
+What structural problem can you identify? Hint: play around with rqt_graph's settings to get more information in your graph.
 
-Solve it by adjusting the launch file. If you succeed you can look at yourself nicely ;-)
+Fix the problem by modifying the launch file. If you succeed you can nicely look at yourself ;-)
 
 
 ## rqt
 
-Many things you have done so far (using terminal commands) can also be done using the software [*rqt*](http://wiki.ros.org/rqt). This program provides a graphical user interface (GUI) and can be used to visualize and control many things in the ROS system (messages for example). 
+Many things you have done so far (using terminal commands) can also be done using [*rqt*](http://wiki.ros.org/rqt). This program provides a graphical user interface (GUI) and can be used to visualize and control many things in the ROS system (messages for example). 
 
 Start the *rqt* GUI:
 
     rqt
 
-Explore the different plugins.
+Explore the available plugins.
 
-Some plugins you already know (rqt_graph, rqt_image_view), we have started and used them before. Within rqt all of these plugins are nicely integrated into one interface.
+Some plugins you already know as we have used them before (rqt_graph, rqt_image_view). *rqt* nicely integrates all of these plugins into a single GUI.
 
 ## Controlling a real mobile robot
 
@@ -416,19 +415,19 @@ If not, you'll have to set the ip address manually:
 
     export ROS_IP=<IP_address_of_your_laptop>
 
-Next you'll have to set the ROS_MASTER_URI value. This will allow the nodes running on your laptop to access to the ROS Master on the robot.
+Next you'll have to set the ROS_MASTER_URI value. This will allow the nodes running on your laptop to access to the remote  ROS Master on the robot.
 
     export ROS_MASTER_URI=http://<ip_address_of_robot>:11311
 
-These exports can also be added to your *.bashrc* file, this way they are automatically executed when opening a new terminal window.  
+These exports can also be added to your *.bashrc* file, this way they are automatically executed when opening a new terminal window (but keep mind to disable the lines (by removing or commenting them) when not using a remote master).  
 
     gedit ~/.bashrc
 
-Check if you can communicate with the ROS Master (now running on the robot):
+Check if you can communicate with the remote ROS Master (now running on the robot):
 
     rostopic list
 
-Controlling the robot works similary to the simulated robot in turtlesim.
+Controlling the robot works similary to the simulated robot in *turtlesim*.
 
 Make the robot drive around in a circle using the *rostopic pub* command.
 
