@@ -1,8 +1,8 @@
 # Workshop "ROS for Engineers" - part 1
 
-author (dutch): Eric Dortmans (e.dortmans@fontys.nl)
+Author (dutch): Eric Dortmans (e.dortmans@fontys.nl)
 
-translation (english): Kris Piters (k.piters@fontys.nl)
+Translation (english): Kris Piters (k.piters@fontys.nl)
 
 
 ## Helpful tips before you start
@@ -39,7 +39,7 @@ You are now ready to start your ROS exercises.
 
 ## Creating a ROS workspace
 
-When installing ROS you'll automatically have a nice number of standard packages installed. Often you want to create new packages yourself or reuse packages by others. You therefore need a so-called *workspace* where you can create or download and build those packages
+When installing ROS you'll automatically have a nice number of standard packages installed. Often you want to create new packages yourself or reuse packages by others. You therefore need a *workspace* where you can create or download and build those packages
 
 Create a [ROS workspace](http://wiki.ros.org/catkin/workspaces#Catkin_Workspaces), for example *catkin_ws* (but the name of the workspace is free to choose). If you don't have a workspace yet, you can create one as follows (example uses the default catkin_ws workspace name):
 ```
@@ -90,28 +90,24 @@ Which packages are available to extend your ROS installation?
 
 There are a lot! You can find an overview [here](http://www.ros.org/browse/list.php).
 
-```
-NOT AVAILABLE FOR ROS KINETIC
-TODO: change to different package for this tutorial
 
-Let's download and install the package *arbotix_python*. We are not interested in the sources, but only want to install and use the package. Let's see if the relevant ROS package is available as a Debian (.deb) installation package. Which debian packages are there with the text *arbotix* in their name?
+Let's download and install the package [*turtlebot-teleop*](http://wiki.ros.org/turtlebot_teleop) as an example. We are not interested in the sources, but only want to install and use the package. Let's see if the relevant ROS package is available as a Debian (.deb) installation package. Which debian packages are there with the text *turtlebot* in their name?
 
 
-    apt-cache search ros-ki- | grep arbotix
+    apt-cache search ros-kinetic- | grep turtlebot
 
 
-Apparently the relevant Debian package is called *ros-indigo-arbotix-python*. Now that we know this, installing is a breeze:
+Apparently the relevant Debian package is called *ros-kinetic-turtlebot-teleop*. Now that we know this, installing is a breeze:
 
-    sudo apt-get install ros-indigo-arbotix-python
+    sudo apt-get install ros-kinetic-turtlebot-teleop
 
-Check whether it is successful:
+Check whether it was successful:
 
-    rospack find arbotix_python
+    rospack find turtlebot-teleop
 
 As you can see, this package has been added to the ROS installation and not to your workspace.
 
-Sometimes we want to download ROS packages that are only available in source form, or whose sources we want to view and perhaps modify. We do not want to add these packages in binary form to our ROS installation, but download them in source form in our workspace.
-```
+Sometimes we want to download ROS packages that are only available in source form, or whose sources we want to view and perhaps modify. We do not want to add these packages to our ROS installation in binary form, but download them in source form to our workspace.
 
 Let's download some helpful ROS sample packages from GitHub to your workspace.
 ```
