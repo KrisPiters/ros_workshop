@@ -202,26 +202,26 @@ Analyze the messages that are currently being published on this topic.
 
 - What do you think the published data means?
 
-- What type of message is associated with the topic */turtle1/cmd_vel*?
+- Which message type is associated with the topic */turtle1/cmd_vel*?
 
 - What happens when using the following command?
-
-```rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist "{linear: {x: 2.0}}"```
-    
+```
+rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist "{linear: {x: 2.0}}"
+```    
 And what about this command?
-
-    rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist "{angular: {z: 1.57}}"
-
+```
+rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist "{angular: {z: 1.57}}"
+```
 Draw a square with the turtle (approximately).
 
 - What happens when you execute the following command?
-
-```rostopic pub -r 10 /turtle1/cmd_vel geometry_msgs/Twist "{linear: {x: 2.0}, angular: {z: 1.8}}"```
-
-How does it compare to this command:
-    
-```rostopic pub -r 10 /turtle1/cmd_vel geometry_msgs/Twist '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'```
-      
+```
+rostopic pub -r 10 /turtle1/cmd_vel geometry_msgs/Twist "{linear: {x: 2.0}, angular: {z: 1.8}}"
+```
+- How does it compare to next command?
+```    
+rostopic pub -r 10 /turtle1/cmd_vel geometry_msgs/Twist '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'
+```
 So far we have only used one application with only one node. In practice, an application will consist of several nodes. We have moved the turtle using ROS commands from the terminal. That is enough to test the node, but of course it is not an integrated application. Suppose we want to control the turtle with the arrow keys of the keyboard. For this we will use another node that will convert input from the keyboard into control commands for the turtle.
 
 Use a new terminal to start the *turtle_teleop_key* node from the *turtlesim* package. You will probably know how to do that by now.
