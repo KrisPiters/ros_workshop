@@ -297,7 +297,9 @@ Published messages can be recorded to a *bag* file. They can be played back at a
 Let's start recording messages on the *turtle1/cmd_vel* topic using [rosbag](http://wiki.ros.org/rosbag):
 
     rosbag record -O /tmp/turtle1 /turtle1/cmd_vel
-    
+
+Make *turtle1* move. 
+
 To stop recording hit *CTRL-C* in the terminal running rosbag.
 
 Reset *turtlesim* to start with a clean slate:
@@ -308,59 +310,60 @@ Play back the recorded messages stored in the *bag file*:
 
     rosbag play /tmp/turtle1.bag
 
-- What happens?
+What happens?
 
-## launch files
+## Launch files
 
-Tot nu toe hebben we steeds alle nodes (plus natuurlijk roscore) stuk voor stuk vanuit een nieuw terminal window moeten opstarten. Dat is natuurlijk niet handig. Gelukkig heeft ROS een mechanisme om een verzameling nodes in een keer te lanceren met behulp van het commando *roslaunch*. Welke nodes met welke parameters moeten worden opstart moeten we natuurlijk wel eerst specificeren. Zo'n specificatie heet een *launch file*.
+Up until now we had to start each node individually from a new terminal window (and *roscore* of course). Starting your nodes this way can be an inconvenience. Luckily ROS has a mechanism to start a whole collection of nodes at once: [roslaunch](http://wiki.ros.org/roslaunch). Your collection of nodes (and their associated parameters) have to be specified for use with the *roslaunch* command. Such a specification is called a *launch file*.
 
-Bestudeer de launchfiles van het *agitr* package. Met het volgende commando open je betreffende launch directory met de Ubuntu filemanager (*nautilus*):
+Analyse the content of the launch files in the *agitr* package. The folder containing the launch files can be opened with Ubuntu's filemanager (*nautilus*) using the following command:
 
     nautilus `rospack find agitr`/launch
     
-Probeer ze uit met het *roslaunch* programma:
+Try to launch them with the *roslaunch* command:
 
-    roslaunch agitr *launchfile_naam*
+    roslaunch agitr <launchfile_name>
 
-We gaan nu zelf een nuttige launch file maken voor het opstarten van benodigde nodes om realtime beeld van een webcam op ons scherm te laten zien. Tegenwoordig hebben veel laptops zo'n webcam boven aan het scherm zitten voor b.v. Skype.
 
-Installeer een USB camera driver package:
+Next we are going to make a useful launch file to launch the nodes needed to show a realtime image from a webcam on our screen.
 
-    sudo apt-get -y install ros-indigo-usb-cam 
+Install a USB camera driver package ([usb_cam](http://wiki.ros.org/usb_cam)):
 
-Dit package bevat een node voor de aansturing van de USB webcam.
+    sudo apt-get -y install ros-kinetic-usb-cam 
 
-We hebben ook een node nodig die images kan lezen en op het scherm kan ztten. We gebruiken daarvoor de *image_view* node van het *image_view* package. Dit package is al standaard geinstalleerd.
+This package contains a node for controlling the webcam.
 
-We willen nu beide nodes tegelijk opstarten met de benodigde parameters. Daarvoor moeten we een launch file maken. We zullen eerst een nieuw package creeren om die launchfile in te zetten. Laten we het *usb_camera* noemen.
+We also need a node that is able to read the images and show them on a screen. for this we will use the *image_view* node included in the [image_view](http://wiki.ros.org/image_view) package. This package should be installed by default.
+
+We want to be able to simultaneously start both nodes with their required parameters. Let's make a launch file to help us achieve this goal. First we'll create a new package that will contain our launch file. Let's call it *usb_camera*.
 
     cd ~/catkin_ws/src
     catkin_create_pkg usb_camera std_msgs rospy roscpp
     cd ~/catkin_ws
     catkin_make
 
-Even checken of ROS ons package nu kan vinden:
+Let's check if ROS can find our new package:
 
     rospack find usb_camera
 
-In ons nog vrij lege package maken we een directory *launch*. Daar gaan we onze launch file in zetten.
+In our still empty package we'll make a directory named *launch*. This directory will contain our launch file.
 
     roscd usb_camera
     mkdir launch
     
-Waarschijnlijk handiger om nu deze directory met de Ubuntu filemanager te openen:
+It's probably useful to open this directory with *Nautilus*:
 
     nautilus `rospack find usb_camera`/launch
     
-Maak nu in deze launch directory een nieuwe file aan met de naam *usb_camera.launch* en geef deze file de volgende inhoud:
+Create a new file named *usb_camera.launch* in the *launch* directory and give it the following content:
 
     <launch>
       <node name="usb_cam" pkg="usb_cam" type="usb_cam_node" output="screen" >
         <param name="video_device" value="/dev/video0" />
         <param name="image_width" value="640" />
         <param name="image_height" value="480" />
-        <param name="pixel_format" value="mjpeg" />
-        <!-- <param name="pixel_format" value="yuyv" /> -->
+        <!--<param name="pixel_format" value="mjpeg" /> -->
+        <param name="pixel_format" value="yuyv" />
         <param name="camera_frame_id" value="usb_cam" />
         <param name="io_method" value="mmap"/>
       </node>
@@ -370,20 +373,22 @@ Maak nu in deze launch directory een nieuwe file aan met de naam *usb_camera.lau
       </node>
     </launch>
 
-Let op: meestal is het webcam device in Ubuntu geregistreerd als */dev/video0*, maar het kan ook bijvoorbeeld */dev/video1* zijn.
+PS: usually the webcam device in Ubuntu is registered as */dev/video0*, but might also be */dev/video1*.  
 
-Let op: niet alle webcams zijn hetzelfde. Soms moet je als pixel_format *mjpeg* gebruiken en soms *yuyv*. Even uitproberen dus.
+PPS: not every webcam is the same. You might have to change the *pixel_format* depending on the camera.
 
-Test de launchfile:
+Test the launchfile:
 
     roslaunch usb_camera usb_camera.launch
 
-Bekijk de computation graph
+Analyze the computation graph:
 
     rqt_graph
 
-Welk structureel probleem zie je? Los het op door de launch file aan te passen.
-Als het je lukt kun je mooi naar jezelf kijken ;-)
+What structural problem do you see? Hint: play around with rqt_graph's settings to get more information in your graph.
+
+Solve it by adjusting the launch file. If you succeed you can look at yourself nicely ;-)
+
 
 ## rqt
 
