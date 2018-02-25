@@ -392,15 +392,15 @@ Solve it by adjusting the launch file. If you succeed you can look at yourself n
 
 ## rqt
 
-Veel zaken die je kunt doen via losse commando's kun je ook doen via het programma *rqt*, de grafische user interface (GUI) van ROS. Dit programma kan ook de robot en verschillende messages visualiseren.
+Many things you have done so far (using terminal commands) can also be done using the software [*rqt*](http://wiki.ros.org/rqt). This program provides a graphical user interface (GUI) and can be used to visualize and control many things in the ROS system (messages for example). 
 
-Start de *rqt* GUI:
+Start the *rqt* GUI:
 
     rqt
 
-Verken de verschillende plugins.
+Explore the different plugins.
 
-Enkele plugins (b.v. rqt_graph, rqt_image_view) ken je al want die hebben we los opgestart en gebruikt. Binnen rqt zijn alle plugins mooi geintegreerd.
+Some plugins you already know (rqt_graph, rqt_image_view), we have started and used them before. Within rqt all of these plugins are nicely integrated into one interface.
 
 ## Besturen van een echte mobiele robot
 
