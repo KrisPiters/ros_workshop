@@ -28,37 +28,11 @@ Programming experience is not necessary, but useful.
 
 ## Necessities
 
-You have to bring your own laptop with installed Ubuntu 16.04 and ROS Kinetic. You can install this software in 2 ways:
+You have to bring your own laptop with Ubuntu 16.04 and ROS Kinetic installed.
 
-1. as a virtual machine under Windows (or Mac OS / X)
-2. native, for example as a multiboot option besides Windows
+Ubuntu Desktop 16.04 can be downloaded [here](http://www.ubuntu.com/download).
 
-### Ubuntu and ROS in a Virtual Machine
-
-Running ROS in a Virtual Machine has the advantage that you do not have to install Ubuntu and ROS yourself. The disadvantage is that the performance is less than a native installation. A native installation is recommended for running 3D simulations.
-
-All you have to do is download 2 files:
-
-- an Ubuntu plus ROS image
-- a program such as VirtualBox to execute that image
-
-On the [Nootrix site] (http://nootrix.com/) there are a number of [ready-to-use ROS Indigo images] (http://nootrix.com/2014/09/ros-indigo-virtual-machine/). The 32 bit image (RosIndigo32Bits.ova) is good enough. You can download it via your web browser [here] (http://www.fhict.nl/docent/downloads/TI/MinorES/RosIndigo32Bits.ova). You can also download it [via Bittorrent] (http://nootrix.com/00download/download.html?fileId=rosIndigo32BitsVMTorrent).
-
-You can download the program VirtualBox for Windows (or Mac OS / X) [here] (https://www.virtualbox.org/wiki/Downloads). Then you have to install it just like any other program.
-Instead of VirtualBox you can also use VMware. You can download the VMware Player [here] (http://www.filehippo.com/download_vmware_player/).
-
-With VirtualBox (or VMware Player) you can now open the RosIndigo32Bits.ova file and start the relevant virtual machine.
-
-### Ubuntu plus ROS native
-
-For a native installation you have to do two things:
-
-1. Install Ubuntu 16.04
-2. Install ROS Kinetic in Ubuntu
-
-Ubuntu Desktop 16.04 you can [download here] (http://www.ubuntu.com/download).
-
-How to install ROS Kinetic (Desktop - full install) you can read [here] (http://wiki.ros.org/kinetic/Installation/Ubuntu).
+A guide for installing ROS Kinetic (Desktop - full install) in Ubuntu can be found [here](http://wiki.ros.org/kinetic/Installation/Ubuntu).
 
 ## Linux command skill
 
