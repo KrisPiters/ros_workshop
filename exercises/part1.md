@@ -71,7 +71,7 @@ This way you can see how the ROS environment variables are set:
 
     env | grep ROS
     
-# Download and install ROS packages
+## Download and install ROS packages
 
 There are also a lot of standard packages installed when installing ROS. One of them is *turtlesim*, a 2D simulation package, made for educational purposes. Let's see if that package is indeed available.
 
@@ -123,12 +123,12 @@ Let's download some helpful ROS sample packages from GitHub to your workspace.
 If all goes well, ROS can find those packages.
 
     rospack find agitr
-    
+
 You can also go to the directory of the package using [roscd](http://wiki.ros.org/rosbash#roscd), for example to make changes:
 
     roscd agitr
     
-## nodes, topics, messages
+## Nodes, topics, messages
 
 Start the node *listener* from the package *beginner_tutorials*
 
@@ -184,43 +184,43 @@ ROS is made to control robots and not to make chat programs. In practice, messag
 
 Start the node *turtlesim_node* from the package *turtlesim*
 
-Which nodes are running?
+- Which nodes are running?
 
-Which topics have been created?
+- Which topics have been created?
 
-View the ROS Computation Graph.
+Analyse the ROS Computation Graph.
 
-To which topics is the node *turtlesim* subscribed? To which topics does it publish?
+- To which topics is the node *turtlesim* subscribed? To which topics does it publish?
 
-What messagetype is published on the topic */turtle1/pose* ?
+- What messagetype is published on the topic */turtle1/pose* ?
 
 With the rostopic command you can do much more. Use this command to address the following questions:
 
-At which frequency (rate) are messages published to this topic?
+- At which frequency (rate) are messages published to this topic?
 
 Analyze the messages that are currently being published on this topic.
 
-What do you think the published data means?
+- What do you think the published data means?
 
-What type of message is associated with the topic */turtle1/cmd_vel*?
+- What type of message is associated with the topic */turtle1/cmd_vel*?
 
-What happens when using the following command?
+- What happens when using the following command?
 
-    rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist "{linear: {x: 2.0}}"
-    
+```rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist "{linear: {x: 2.0}}"```
+    
 And what about this command?
 
     rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist "{angular: {z: 1.57}}"
 
 Draw a square with the turtle (approximately).
 
-What happens when you execute the following command?
+- What happens when you execute the following command?
 
-    rostopic pub -r 10 /turtle1/cmd_vel geometry_msgs/Twist "{linear: {x: 2.0}, angular: {z: 1.8}}"
+```rostopic pub -r 10 /turtle1/cmd_vel geometry_msgs/Twist "{linear: {x: 2.0}, angular: {z: 1.8}}"```
 
 How does it compare to this command:
     
-    rostopic pub -r 10 /turtle1/cmd_vel geometry_msgs/Twist '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'
+```rostopic pub -r 10 /turtle1/cmd_vel geometry_msgs/Twist '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'```
       
 So far we have only used one application with only one node. In practice, an application will consist of several nodes. We have moved the turtle using ROS commands from the terminal. That is enough to test the node, but of course it is not an integrated application. Suppose we want to control the turtle with the arrow keys of the keyboard. For this we will use another node that will convert input from the keyboard into control commands for the turtle.
 
@@ -230,7 +230,7 @@ Use the computation graph to see how the *turtle_teleop_key* node is linked to t
 
 Try using *rostopic echo* to analyze the messages that are being published by *turtle_teleop_key* when you press a certain arrow key.
 
-## services
+## Services
 
 Topics arent the only way for nodes to exchange information. A node can also call a service offered by another node (or offer a service itself). We can test a service from a terminal by using the [rosservice](http://wiki.ros.org/rosservice) command.
 
@@ -256,7 +256,7 @@ Reset turtlesim:
 
     rosservice call /reset
 
-## parameters
+## Parameters
 
 Nodes can also read parameters. These parameters have to be published before starting the node, this usually happens by using startup scripts ([launch files](http://wiki.ros.org/roslaunch)).
 
@@ -288,27 +288,27 @@ Which topics are available after doing this?
 
     rostopic list
 
-Make the new new turtle move.
+Make the newly added turtle move.
 
-## Opnemen en afspelen van messages
+## Recording and playing back messages
 
-Soms willen we alles wat er op een topic wordt gepubliceerd opslaan in een zogenaamde *bag* file om later nog eens te kunnen afspelen. Dit is erg handig voor het testen!
+Published messages can be recorded to a *bag* file. They can be played back at a later time. This is very useful for testing!
 
-Laten we de messages op het topic *turtle1/cmd_vel* eens een tijdje opnemen:
+Let's start recording messages on the *turtle1/cmd_vel* topic using [rosbag](http://wiki.ros.org/rosbag):
 
     rosbag record -O /tmp/turtle1 /turtle1/cmd_vel
     
-als je wilt stoppen tik je *CTRL-C* in het terminal window waar je dit commando hebt gestart .
+To stop recording hit *CTRL-C* in the terminal running rosbag.
 
-Reset turtlesim om met een schone lei te beginnen:
+Reset *turtlesim* to start with a clean slate:
 
     rosservice call /reset
     
-Speel de opgenomen `bag` nu eens af:
+Play back the recorded messages stored in the *bag file*:
 
     rosbag play /tmp/turtle1.bag
 
-Wat gebeurt er?
+- What happens?
 
 ## launch files
 
