@@ -402,45 +402,41 @@ Explore the different plugins.
 
 Some plugins you already know (rqt_graph, rqt_image_view), we have started and used them before. Within rqt all of these plugins are nicely integrated into one interface.
 
-## Besturen van een echte mobiele robot
+## Controlling a real mobile robot
 
-Tot nu toe hebben we alle nodes op onze eigen laptop gedraaid. Meestal draait een gedeelte van de ROS nodes echter op de robot zelf. De nodes op onze laptop moeten dan via het netwerk (b.v. Wifi) communiceren met de nodes die op de robot draaien.
+Up until now all nodes have been run on our own laptop. Usually a part of the ROS nodes run on the robot itself. The nodes on our laptop will have to use a network connection (ea. Wifi) to communicate with the nodes running on the robot.
 
-ROS is gemaakt om gedistribueerd te draaien. Wel moet je weten waar de ROS Master node draait. Meestal draait die op de robot. Het is voldoende om de omgevingsvariabelen ROS_IP en ROS_MASTER_URI aan te passen. In ROS_IP moet het IP_ adres van je laptop komen. Dit kunnen we opvragen via het commando `hostname -I`. Let op: je laptop kan meerder IP adressen hebben (want elke actieve netwerk interface krijgt een eigen IP adres). Je kiest dan die van het netwerk waarmee je met de robot bent verbonden. Heb je maar een IP adres dan is het simpel:
+ROS is designed to operate in a distributed way. For this to work you need to know on which machine the ROS Master node (roscore) is running. Usually it'll run on the robot itself. It is sufficient to set the ROS environment variables for ROS_IP and ROS_MASTER_URI to enable communication between your laptop and the robot. ROS_IP (on your laptop) has to be set to the ip address of your laptop. 
+
+Make sure the robot and your laptop are both connected to the same network. Then use the following command to view your ip addresses:
+
+    hostname -I
+
+ROS_IP will have to be set to the address that partly matches the robot's address (eg 192.168.x.x). If only one address is returned you can simply reuse the hostname command:
 
     export ROS_IP=`hostname -I`
 
-Anders moet je zelf het goede IPadres invullen:
+If not, you'll have to set the ip address manually:
 
-    export ROS_IP=*IP_adres_van_je_laptop*
+    export ROS_IP=<IP_address_of_your_laptop>
 
-Nu moet je nog instellen hoe jouw laptop nodes de ROS Master op de robot kunnen bereiken:
+Next you'll have to set the ROS_MASTER_URI value. This will allow the nodes running on your laptop to access to the ROS Master on the robot.
 
-    export ROS_MASTER_URI=http://*IP_adres_van_de_robot*:11311
+    export ROS_MASTER_URI=http://<ip_address_of_robot>:11311
 
-Deze exports kun je ook in je *.bashrc* zetten, dan worden ze automatisch uitgevoerd als je een nieuw terminal window opent:
+These exports can also be added to your *.bashrc* file, this way they are automatically executed when opening a new terminal window.  
 
     gedit ~/.bashrc
 
-Kijk of je met de ROS Master (die op de robot draait) kunt communiceren:
+Check if you can communicate with the ROS Master (now running on the robot):
 
     rostopic list
 
-Het besturen van de robot gaat nu exact hetzelfde als bij de gesimuleerde robot in turtlesim.
+Controlling the robot works similary to the simulated robot in turtlesim.
 
-Laat de robot door middel van een *rostopic pub* commando een rondje draaien.
+Make the robot drive around in a circle using the *rostopic pub* command.
 
-Start het volgende handige programma om de robot met je muis te besturen:
-
-    arbotix_gui
-    
-Dit programma leest je muis acties (bewegen van de rode stip) en vertaalt ze in Twist messages op het cmd_vel topic.
-
-De robot heeft ook een camera, zodat we zien waar we rijden. Maak het camerabeeld zichtbaar view de *Image View* plugin van rqt.
-
-Open ook eens de *RViz* plugin van rqt en voeg een RobotModel display toe (gebruik Add). Je ziet dan de robot model gevisualiseerd. Daar komen we o.a. in volgende sessies op terug.
-
-## Referenties
+## References
 - [A Gentle Introduction to ROS](http://www.cse.sc.edu/~jokane/agitr/)
 - [ROS Tutorials](http://wiki.ros.org/ROS/Tutorials)
 - [YAML on the ROS command line](http://wiki.ros.org/ROS/YAMLCommandLine)
