@@ -1,47 +1,54 @@
-# Workshop "ROS voor Engineers" - deel 2
+# Workshop "ROS for Engineers" - part 2
 
-auteur: Eric Dortmans (e.dortmans@fontys.nl)
+Original author (Dutch): Eric Dortmans (e.dortmans@fontys.nl)
+Translation / Update (English): Kris Piters (k.piters@fontys.nl)
 
-## Voorbereiding
+## Preperation
 
-Update de ros_examples stack die je in de vorige sessie hebt geinstalleerd:
+Update the ros_examples package you installed in the previous exercise:
 
     cd ~/catkin_ws/src/ros_examples
     git pull
     cd ~/catkin_ws
     catkin_make
 
-Installeer de Turtlebot simulator stack
+Install the packages needed for simulating the Turtlebot:
 
-    sudo apt-get install ros-indigo-turtlebot
-    sudo apt-get install ros-indigo-turtlebot-apps
-    sudo apt-get install ros-indigo-turtlebot-rviz-launchers
-    sudo apt-get install ros-indigo-turtlebot-create-desktop
-    sudo apt-get install ros-indigo-turtlebot-simulator
+    sudo apt-get install ros-kinetic-turtlebot
+    sudo apt-get install ros-kinetic-turtlebot-apps
+    sudo apt-get install ros-kinetic-turtlebot-rviz-launchers
+    ~~sudo apt-get install ros-kinetic-turtlebot-create-desktop~~
+    sudo apt-get install ros-kinetic-turtlebot-simulator
 
-## Besturen van een gesimuleerde robot in Stage
+Install extra packages for use with Stage 2D:
 
-We gebruiken nu de Stage 2D simulator in plaats van een echte robot. De werking is hetzelfde.
+    sudo apt-get install ros-kinetic-teleop-twist-keyboard
+    sudo apt-get install ros-kinetic-stage
+    sudo apt-get install ros-kinetic-stage-ros
 
-Start een gesimuleerde robot in een gesimuleerde wereld:
+## Controlling a simulated robot in Stage
+
+In this chapter we'll use the Stage 2D simulator to simulate a real robot. 
+
+Start a simulated robot in a simulated world:
 
     roslaunch stage_worlds kinect_world.launch
 
-Start de *arbotix gui* om met je muis de robot te besturen:
+Use another terminal window to start the *teleop_twist_keyboard* node for controlling the robot:
 
-    arbotix_gui
+    rosrun teleop_twist_keyboard teleop_twist_keyboard.py
 
-Bekijk in een ander window de odometry informatie zoals die door de robot wordt gepubliceerd:
+Use another window to analyze the odometry information published by the robot:
 
     rostopic echo /odom
 
-Zo kun je zien hoe een *Odometry* message is opgebouwd:
+Use the following command to see the structure of a *Odometry* message:
 
     rostopic type /odom | rosmsg show
   
-Rij wat rond en kijk hoe de odom informatie verandert.
+See how the odometry information will change by driving around.
 
-Start *rviz* om een en ander te visualiseren:
+Start [*rviz*](http://wiki.ros.org/rviz) for extra visualization of data produced by the robot:
 
     roslaunch stage_worlds rviz_stage.launch
 
