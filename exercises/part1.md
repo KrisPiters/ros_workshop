@@ -102,7 +102,7 @@ Apparently the relevant Debian package is called *ros-kinetic-turtlebot-teleop*.
 
 Check whether it was successfully installed:
 
-    rospack find turtlebot-teleop
+    rospack find turtlebot_teleop
 
 As you can see, this package has been added to the ROS installation and not to your workspace.
 
