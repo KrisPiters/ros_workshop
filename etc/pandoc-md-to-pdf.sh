@@ -3,7 +3,7 @@
 # Based on code by: https://gist.github.com/hugorodgerbrown/5317616
 #
 # 1. Install pandoc from http://johnmacfarlane.net/pandoc/
-# 2. Copy this script into the directory containing the .md files
+# 2. Copy this script and listings-setup.tex into the directory containing the .md files
 # 3. Ensure that the script has execute permissions
 # 4. Run the script
 #
