@@ -138,7 +138,7 @@ Take a look at the Computation Graph:
 
     rqt_graph
 
-What, do you think, could be the function of the *cmd_vel_mux* node? Take a look at it's parameter (YAML) file:
+What could be the function of the *cmd_vel_mux* node? Take a look at it's parameter (YAML) file:
 
     cat `rospack find turtlebot_bringup`/param/mux.yaml
 
@@ -146,7 +146,7 @@ Use your keyboard to control the robot:
 
     roslaunch turtlebot_teleop keyboard_teleop.launch
 
-Just like the robot before, the Turtlebot is also able to navigate autonomously. Try sending it a navigation goal by using the *2D Nav Goal* button. As you might have noticed the Turtlebot is not moving. Combine the Computation Graph, your newly acquired knowledge of the *cmd_vel_mux* parameters, and *rostopic echo* to make the Turtlebot move autonomously (Hint: priorities).
+Just like the robot before, the Turtlebot is also able to navigate autonomously. Try sending it a navigation goal by using the *2D Nav Goal* button in RViz. As you might have noticed the Turtlebot is not moving. Combine the Computation Graph, your newly acquired knowledge of the *cmd_vel_mux* parameters, and *rostopic echo* to make the Turtlebot move autonomously (Hint: priorities).
 
 The Turtlebot itself has been visualised nicely in Rviz. In part 3 of the workshop we'll learn how to do this.
 
