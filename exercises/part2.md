@@ -20,7 +20,7 @@ Install the packages needed for simulating the Turtlebot:
     ~~sudo apt-get install ros-kinetic-turtlebot-create-desktop~~
     sudo apt-get install ros-kinetic-turtlebot-simulator
 
-Install extra packages for use with Stage 2D:
+Install extra packages for use with [Stage](http://wiki.ros.org/stage#External_Documentation):
 
     sudo apt-get install ros-kinetic-teleop-twist-keyboard
     sudo apt-get install ros-kinetic-stage
