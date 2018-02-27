@@ -85,49 +85,46 @@ Stop your running nodes (Stage, Rviz, etc). To be sure you could close all termi
 
 We are now going to experiment with the ROS Navigation stack.
 
-Start *gmapping* to make a map of the (simulated) robot world:
+Start *[gmapping](http://wiki.ros.org/gmapping)* to make a map of the (simulated) robot world:
 
     roslaunch stage_navigation kinect_gmapping.launch
 
-Start the *teleop_twist_keyboard* node to the robot:
+Start the *teleop_twist_keyboard* **OR** *mouse_teleop* node to control the robot:
 
     rosrun teleop_twist_keyboard teleop_twist_keyboard.py
     
-Alternativly Start de *arbotix gui* om met je muis de robot te besturen:
+    roslaunch mouse_teleop mouse_teleop.launch mouse_vel:=cmd_vel
+   
+You can also "move" the robot by selecting it with your mouse and dragging it around in Stage.
 
-    arbotix_gui
+Drive the robot around in the simulated world, regulary returning to where you've been before. In the RViz window you'll be able see how *gmapping* tries to make a map of the world.
 
-Je kunt overigens de robot in Stage ook verplaatsen door hem met je muis te selecteren en dan te "verslepen".
+You'll notice it's not easy to make a good map! 
 
-Rij de robot rond door de gesimuleerde wereld. Kom ook regelmatig terug waar je al geweest bent.
-In het RViz window kun je dan zien hoe gmapping een kaart (map) van de wereld probeert te maken.
-
-Je zult merken dat het niet meevalt om een goede map te maken! 
-
-We zullen een andere robot proberen. Stop de lopende simulatie en start de volgende:
+We will try another robot. Stop the running simulation and start the following:
 
     roslaunch stage_navigation laser_gmapping.launch
     
-Zie en merk je verschil? Wat neem je waar en hoe zou dat komen?
+- Can you see and notice a difference?
+- What can you conclude from your observations, having compared both robots?
 
-Als je tevreden bent met je map kun je hem opslaan:
+If you are satisfied with your map, you can save it using [map_saver](http://wiki.ros.org/map_server#map_saver):
 
     rosrun map_server map_saver -f /tmp/world_map
 
-Stop de lopende lsimulatie. Voor de zekerheid sluit alle terminal windows.
+Stop all your nodes (if you want to be save, close all terminal windows).
 
-Nu we een kaart hebben kunnen we die door de robot laten gebruiken om voortaan zelf zijn weg te zoeken.
-We gebruiken daarvoor de *amcl* localizatie node en de *move_base* navigatie node:
+Now that we have created and saved a map of the environment, the robot will be able to find it's own way based on this map. We'll use [*amcl*](http://wiki.ros.org/amcl) for localization and [*move_base*](http://wiki.ros.org/move_base) for navigation:
 
     roslaunch stage_navigation kinect_amcl.launch map_file:=/tmp/world_map.yaml
 
-Bekijk de Computation Graph:
+Take a look at the Computation Graph:
 
     rqt_graph
 
-Gebruik the *2D Nav Goal* knop in RViz om robot een doel (goal) te geven. Click eerst op de knop en dan op een plaats in de map. Stuur hem bijvoorbeeld naar linksboven en vervolgens naar rechtsonder in de map.
+Use the *2D Nav Goal* button in to give the robot a navigation goal. First click the button, then click somewhere on the map (dragging before letting go of your click will allow you to set a goal orientation). As an example you could send your robot from end of the map to the other.
 
-Stop de draaiende Stage simulatie. Voor de zekergeheid sluit alle terminal windows.
+Stop your running nodes before continuing.
 
 ## Besturen van een gesimuleerde Turtlebot in Stage
 
