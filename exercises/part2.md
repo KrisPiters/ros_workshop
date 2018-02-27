@@ -106,7 +106,7 @@ We will try another robot. Stop the running simulation and start the following:
     roslaunch stage_navigation laser_gmapping.launch
     
 - Can you see and notice a difference?
-- What can you conclude from your observations, having compared both robots?
+- What can you conclude from your observations, having compared both results?
 
 If you are satisfied with your map, you can save it using [map_saver](http://wiki.ros.org/map_server#map_saver):
 
@@ -122,7 +122,7 @@ Take a look at the Computation Graph:
 
     rqt_graph
 
-Use the *2D Nav Goal* button in to give the robot a navigation goal. First click the button, then click somewhere on the map (dragging before letting go of your click will allow you to set a goal orientation). As an example you could send your robot from end of the map to the other.
+Use the *2D Nav Goal* button in Rviz to give the robot a navigation goal. First click the button, then click somewhere on the map (dragging before letting go of your click will allow you to set a goal orientation). As an example you could send your robot from end of the map to the other.
 
 Stop your running nodes before continuing.
 
