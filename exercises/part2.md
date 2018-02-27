@@ -1,6 +1,7 @@
 # Workshop "ROS for Engineers" - part 2
 
 Original author (Dutch): Eric Dortmans (e.dortmans@fontys.nl)
+
 Translation / Update (English): Kris Piters (k.piters@fontys.nl)
 
 ## Preperation
@@ -17,18 +18,18 @@ Install the packages needed for simulating the Turtlebot:
     sudo apt-get install ros-kinetic-turtlebot
     sudo apt-get install ros-kinetic-turtlebot-apps
     sudo apt-get install ros-kinetic-turtlebot-rviz-launchers
-    ~~sudo apt-get install ros-kinetic-turtlebot-create-desktop~~
     sudo apt-get install ros-kinetic-turtlebot-simulator
 
 Install extra packages for use with [Stage](http://wiki.ros.org/stage#External_Documentation):
 
+    sudo apt-get install ros-kinetic-mouse-teleop
     sudo apt-get install ros-kinetic-teleop-twist-keyboard
     sudo apt-get install ros-kinetic-stage
     sudo apt-get install ros-kinetic-stage-ros
 
 ## Controlling a simulated robot in Stage
 
-In this chapter we'll use the Stage 2D simulator to simulate a real robot. 
+In this chapter we'll use Stage, a 2D robot simulator. 
 
 Start a simulated robot in a simulated world:
 
@@ -46,50 +47,53 @@ Use the following command to see the structure of a *Odometry* message:
 
     rostopic type /odom | rosmsg show
   
-See how the odometry information will change by driving around.
+Watch how the odometry information will change by driving around.
 
 Start [*rviz*](http://wiki.ros.org/rviz) for extra visualization of data produced by the robot:
 
     roslaunch stage_worlds rviz_stage.launch
 
-## TF
+## [TF](http://wiki.ros.org/tf) 
 
-Bekijk de *TF tree*:
+Take a look at the *tf tree* while the simulated world is active:
 
     rosrun rqt_tf_tree rqt_tf_tree
 
-Of run rqt en start de TF Tree plugin:
+Alternatively use rqt and its tf tree plugin:
 
-    rqt &
+    rqt
 
     Plugins > Visualization > TF Tree
 
-Bekijk alles wat er gepubliceerd wordt op de TF tree
+Take a look at what's being published to the tf tree with [tf_monitor](http://wiki.ros.org/tf#tf_monitor):
 
     rosrun tf tf_monitor
 
-Vraag specifieke, enkelvoudige transformaties op:
-
+Request specific, single transformations with [tf_echo](http://wiki.ros.org/tf#tf_echo):
+       
     rosrun tf tf_echo /base_link /base_laser_link
     rosrun tf tf_echo /base_footprint /base_link
     rosrun tf tf_echo /odom /base_footprint
-    rosrun tf tf_echo /map /odom
+    
+You can also request complex, multiple transformations, e.g.:
 
-Je kunt ook complexe, meervoudige transformaties opvragen, b.v.:
+    rosrun tf tf_echo /odom /base_laser_link
 
-    rosrun tf tf_echo /map /base_laser_link
+## Navigation
 
-## Navigatie
+Stop your running nodes (Stage, Rviz, etc). To be sure you could close all terminal windows.
 
-Stop de Stage simulatie en RViz. Voor de zekerheid sluit alle windows.
+We are now going to experiment with the ROS Navigation stack.
 
-We gaan nu experimenteren met de ROS Navigatie stack.
-
-Start *gmapping* om een kaart te maken van de (gesimuleerde) robot wereld:
+Start *gmapping* to make a map of the (simulated) robot world:
 
     roslaunch stage_navigation kinect_gmapping.launch
-  
-Start de *arbotix gui* om met je muis de robot te besturen:
+
+Start the *teleop_twist_keyboard* node to the robot:
+
+    rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+    
+Alternativly Start de *arbotix gui* om met je muis de robot te besturen:
 
     arbotix_gui
 
@@ -195,6 +199,7 @@ Voeg ook een Camera toe op het /camera/rgb/image_raw topic.
 ## Referenties
 - [ROS Tutorials](http://wiki.ros.org/ROS/Tutorials)
 - [TF](http://wiki.ros.org/tf)
+- [Introduction to TF](http://wiki.ros.org/tf/Tutorials/Introduction%20to%20tf)
 - [rqt](http://wiki.ros.org/rqt)
 - [navigation](http://wiki.ros.org/navigation)
 - [TurtleBot](http://wiki.ros.org/Robots/TurtleBot)
