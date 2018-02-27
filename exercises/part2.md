@@ -4,7 +4,7 @@ Original author (Dutch): Eric Dortmans (e.dortmans@fontys.nl)
 
 Translation / Update (English): Kris Piters (k.piters@fontys.nl)
 
-## Preperation
+## Preparation
 
 Update the ros_examples package you installed in the previous exercise:
 
@@ -124,31 +124,31 @@ Take a look at the Computation Graph:
 
 Use the *2D Nav Goal* button in Rviz to give the robot a navigation goal. First click the button, then click somewhere on the map (dragging before letting go of your click will allow you to set a goal orientation). As an example you could send your robot from end of the map to the other.
 
-Stop your running nodes before continuing.
+**Stop your running nodes before continuing.**
 
-## Besturen van een gesimuleerde Turtlebot in Stage
+## Controlling a simulated Turtlebot in Stage
 
-We zullen nu hetzelfde doen maar met een robot die ook echt bestaat: de Turtlebot.
+Next, we'll simulate and control a robot that exists for real: the [Turtlebot](http://wiki.ros.org/Robots/TurtleBot).
 
-Start de Turtlebot sofware:
+Start the Turtlebot software:
 
     roslaunch turtlebot_stage turtlebot_in_stage.launch
 
-Bekijk de Computation Graph:
+Take a look at the Computation Graph:
 
     rqt_graph
 
-Wat zou de cmd_vel_mux doen? Lees de parameter file (een YAML file) van de cmd_vel_mux:
+What, do you think, could be the function of the *cmd_vel_mux* node? Take a look at it's parameter (YAML) file:
 
     cat `rospack find turtlebot_bringup`/param/mux.yaml
 
-Gebruik het keyboard om de robot te besturen:
+Use your keyboard to control the robot:
 
     roslaunch turtlebot_teleop keyboard_teleop.launch
 
-De robot kan ook autonoom navigeren. Gebruik de *2D Nav Goal* knop in RViz om robot een doel (goal) te geven.
+Just like the robot before, the Turtlebot is also able to navigate autonomously. Try sending it a navigation goal by using the *2D Nav Goal* button. As you might have noticed the Turtlebot is not moving. Combine the Computation Graph, your newly acquired knowledge of the *cmd_vel_mux* parameters, and *rostopic echo* to make the Turtlebot move autonomously (Hint: priorities).
 
-Merk op dat de Turtlebot mooi gevisualiseerd wordt in RViz. Hoe dat moet gaan we volgende keer bekijken.
+You might have noticed the Turtlebot itself has been visualised nicely in Rviz. In part 3 of the workshop we'll learn how to do this.
 
 ## EXTRA: Rijden van een gesimuleerde Turtlebot in Gazebo
 
