@@ -135,11 +135,6 @@ We zullen nu hetzelfde doen maar met een robot die ook echt bestaat: de Turtlebo
 
 Start de Turtlebot sofware:
 
-    export TURTLEBOT_BASE=roomba
-    export TURTLEBOT_STACKS=circles
-    export TURTLEBOT_3D_SENSOR=kinect
-    export TURTLEBOT_STAGE_MAP_FILE=`rospack find turtlebot_stage`/maps/maze.yaml
-    export TURTLEBOT_STAGE_WORLD_FILE=`rospack find turtlebot_stage`/maps/stage/maze.world
     roslaunch turtlebot_stage turtlebot_in_stage.launch
 
 Bekijk de Computation Graph:
@@ -164,10 +159,6 @@ Gazebo is een 3D simulator. Dit vraagt natuurlijk meer van de grafische onderste
 
 Start de Gazebo simulator:
 
-    export TURTLEBOT_BASE=roomba
-    export TURTLEBOT_STACKS=circles
-    export TURTLEBOT_3D_SENSOR=kinect
-    export TURTLEBOT_GAZEBO_WORLD_FILE=`rospack find turtlebot_gazebo`/worlds/playground.world
     roslaunch turtlebot_gazebo turtlebot_world.launch
   
 Run de *gmapping* node:
