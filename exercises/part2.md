@@ -150,39 +150,35 @@ Just like the robot before, the Turtlebot is also able to navigate autonomously.
 
 The Turtlebot itself has been visualised nicely in Rviz. In part 3 of the workshop we'll learn how to do this.
 
-## EXTRA: Rijden van een gesimuleerde Turtlebot in Gazebo
+## EXTRA: Controlling a simulated Turtlebot in Gazebo
 
-Gazebo is een 3D simulator. Dit vraagt natuurlijk meer van de grafische ondersteuning en van de performance van je laptop, maar is wel veel echter.
+[Gazebo](http://wiki.ros.org/gazebo_ros_pkgs) is a 3D Simulator. Running this simulator requires more computing power (both graphics and CPU), partly due to its physics engine. 
 
-Start de Gazebo simulator:
+Start the Gazebo simulator:
 
     roslaunch turtlebot_gazebo turtlebot_world.launch
   
-Run de *gmapping* node:
+Run the *gmapping* node:
 
     roslaunch turtlebot_gazebo gmapping_demo.launch
 
-Visualizeer de robot tijdens navigatie:
+Visualise the robot during navigation:
     
     roslaunch turtlebot_rviz_launchers view_navigation.launch
 
-Start de *arbotix_gui* om de robot te besturen:
+Start the *teleop_twist_keyboard* **OR** *mouse_teleop* node to control the robot:
 
-    arbotix_gui cmd_vel:=cmd_vel_mux/input/teleop
+    rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+    
+    roslaunch mouse_teleop mouse_teleop.launch mouse_vel:=cmd_vel
+    
+The simulation also includes an 'actual' 3D sensor. Try adding a camera view in RViz for the topic */camera/rgb/image_raw*.
 
-De simulatie bootst ook een echte kinect na. Voeg maar eens een Camera toe in RViz op het topic /camera/rgb/image_raw
+## EXTRA: Navigation with a real Turtlebot
 
-## EXTRA: Navigeren met een echte Turtlebot
+For this last assignment you need to set your *ROS_IP* and *ROS_MASTER_URI*.
 
-Voor het installen van *ROS_IP* en *ROS_MASTER_URI* zie laatste opdracht van vorige sessie.
-
-Start de robot, inclusief gmapping node.
-
-Bekijk en bestuur de robot via RViz op je laptop:
-
-    roslaunch turtlebot_rviz_launchers view_navigation.launch
-
-Voeg ook een Camera toe op het /camera/rgb/image_raw topic.
+The [Turtlebot tutorials](http://wiki.ros.org/Robots/TurtleBot#turtlebot.2BAC8-Tutorials.2BAC8-indigo-1.Navigation) for navigation on the ROS wiki will provide you with information on how to setup and use navigation with an actual Turtlebot.
 
 ## Referenties
 - [ROS Tutorials](http://wiki.ros.org/ROS/Tutorials)
