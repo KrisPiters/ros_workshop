@@ -178,7 +178,7 @@ The simulation also includes an 'actual' 3D sensor. Try adding a camera view in 
 
 For this last assignment you need to set your *ROS_IP* and *ROS_MASTER_URI*.
 
-The [Turtlebot tutorials](http://wiki.ros.org/Robots/TurtleBot#turtlebot.2BAC8-Tutorials.2BAC8-indigo-1.Navigation) for navigation on the ROS wiki will provide you with information on how to setup and use navigation with an actual Turtlebot.
+The [**Turtlebot tutorials**](http://wiki.ros.org/Robots/TurtleBot#turtlebot.2BAC8-Tutorials.2BAC8-indigo-1.Navigation) for navigation on the ROS wiki will provide you with information on how to setup and use navigation with an actual Turtlebot.
 
 ## References
 - [ROS Tutorials](http://wiki.ros.org/ROS/Tutorials)
