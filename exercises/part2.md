@@ -180,7 +180,7 @@ For this last assignment you need to set your *ROS_IP* and *ROS_MASTER_URI*.
 
 The [Turtlebot tutorials](http://wiki.ros.org/Robots/TurtleBot#turtlebot.2BAC8-Tutorials.2BAC8-indigo-1.Navigation) for navigation on the ROS wiki will provide you with information on how to setup and use navigation with an actual Turtlebot.
 
-## Referenties
+## References
 - [ROS Tutorials](http://wiki.ros.org/ROS/Tutorials)
 - [TF](http://wiki.ros.org/tf)
 - [Introduction to TF](http://wiki.ros.org/tf/Tutorials/Introduction%20to%20tf)
