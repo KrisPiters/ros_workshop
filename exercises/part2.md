@@ -168,7 +168,7 @@ Visualise the robot during navigation:
 
 Start the *teleop_twist_keyboard* **OR** *mouse_teleop* node to control the robot:
 
-    rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+    roslaunch turtlebot_teleop keyboard_teleop.launch
     
     roslaunch mouse_teleop mouse_teleop.launch mouse_vel:=cmd_vel
     
