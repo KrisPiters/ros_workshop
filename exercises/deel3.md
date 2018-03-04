@@ -1,29 +1,33 @@
-# Workshop "ROS voor Engineers" - deel 3
+# Workshop "ROS for Engineers" - deel 3
 
-auteur: Eric Dortmans (e.dortmans@fontys.nl)
+Author (NL): Eric Dortmans (e.dortmans@fontys.nl)
 
-## Voorbereiding
+Translation (EN): Kris Piters (k.piters@fontys.nl)
 
-Update de ros_examples stack die je in de eerste sessie hebt geinstalleerd:
+## Preparation
+
+Update the ros_examples stack you installed in the first session:
 
     cd ~/catkin_ws/src/ros_examples
     git pull
     cd ~/catkin_ws
     catkin_make
 
-Installeer benodigde binaire ROS packages
+Install the required binary ROS packages:
 
-    sudo apt-get install ros-indigo-urdf 
-    sudo apt-get install ros-indigo-urdf-tutorial
+    sudo apt-get install ros-kinetic-urdf 
+    sudo apt-get install ros-kinetic-urdf-tutorial
     sudo apt-get install liburdfdom-tools
-    sudo apt-get install ros-indigo-turtlebot ros-indigo-turtlebot-arm
-    sudo apt-get install ros-indigo-gazebo-ros-pkgs ros-indigo-gazebo-ros-control
-    sudo apt-get install ros-indigo-moveit-full
+    sudo apt-get install ros-kinetic-turtlebot
+    sudo apt-get install ros-kinetic-gazebo-ros-pkgs
+    sudo apt-get install ros-kinetic-gazebo-ros-control
+    sudo apt-get install ros-kinetic-moveit
     
-Installeer Gazebo demo package:
+Install the [Gazebo demo package](https://github.com/ros-simulation/gazebo_ros_demos) and [turtlebot_arm](http://wiki.ros.org/turtlebot_arm?distro=kinetic) from source:
 
     cd ~/catkin_ws/src/
     git clone https://github.com/ros-simulation/gazebo_ros_demos.git
+    git clone https://github.com/turtlebot/turtlebot_arm.git
     cd ..
     catkin_make
 
