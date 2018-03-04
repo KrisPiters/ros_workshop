@@ -33,35 +33,33 @@ Install the [Gazebo demo package](https://github.com/ros-simulation/gazebo_ros_d
 
 ## URDF files
 
-Alle URDF files die we gebruiken kun je vinden in het package *urdf_examples*.
-Je kunt naar betreffende map met URDF files gaan via het volgende commando:
+All the files for this excercise can be found in the package *urdf_examples* .
+You can go to the relevant folder with URDF files via the following command:
 
     roscd urdf_examples/urdf
 
 ## URDF test
 
-Bekijk de file *test_robot.urdf* in je editor:
+View the file *test_robot.urdf* in your editor:
 
     gedit test_robot.urdf
    
-Maak een PDF file met een grafische representatie van het model:
+Create a PDF file with a graphic representation of the model:
 
     urdf_to_graphiz test_robot.urdf
     evince test_robot.pdf
 
-Visualizeer dit model nu in RViz:
+Now visualize this model in RViz (set *[Fixed Frame](http://wiki.ros.org/rviz/UserGuide#The_Fixed_Frame)* to *link1*):
 
     roslaunch urdf_tutorial display.launch model:=test_robot.urdf
-    
-Kies *link1* als *Fixed Frame*.
-  
-Wat zie je en wat niet?
 
-Open een nieuwe terminal en Bekijk de ROS Graph om te zien hoe wat de visualisatie launch file heeft opgestart:
+- What do and/or don't you see?
+
+Open a new terminal and view the ROS Graph to see what was launched by the *display.launch* file:
 
     rqt_graph
 
-## Een Link positioneren
+## Position a Link
 
 We gaan nu een robot met wat meer vorm bekijken. Open het model *block.urdf* in een editor:
 
@@ -255,8 +253,9 @@ Als je hier bent heb je hopelijk geleerd hoe je zonder te programmeren toch veel
  
 ## Referenties
 
+- [rviz userguide](http://wiki.ros.org/rviz/UserGuide)
 - [ROS Tutorials](http://wiki.ros.org/ROS/Tutorials)
-- [ROS-Industrial(Indigo) Training Exercises](http://aeswiki.datasys.swri.edu/rositraining/indigo/Exercises)
+- [ROS-Industrial Training Exercises](http://ros-industrial.github.io/industrial_training/)
 - [XML Robot Description Format (URDF)](http://wiki.ros.org/urdf/XML/model)
 - [URDF Tutorials](http://wiki.ros.org/urdf/Tutorials)
 - [Create a URDF for an Industrial Robot](http://wiki.ros.org/Industrial/Tutorials/Create%20a%20URDF%20for%20an%20Industrial%20Robot)
