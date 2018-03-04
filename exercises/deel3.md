@@ -110,41 +110,40 @@ If successful in modifying the URDF + XACRO model, restart the visualization wit
 
 Adjust the *sliders* and press the *random* and *center* buttons in the GUI. Observe what happens to the visualisation.
 
-## De robot_description parameter
+## The robot_description parameter
 
-Je kunt ook de parameter server vragen om een kopie van het huidige robot model:
-Laat de visualisatie draaien en open een nieuwe terminal. Geef dan het volgende commando:
+You can also request the parameter server for a copy of the current robot model:
+Let the visualization (*blocks.urdf.xacro*) run and open a new terminal. Then enter the following command:
 
     rosparam get -p /robot_description | tail -n +2 |cut -c 3- > robot_description.urdf
 
-Je vraagt dus gewoon de huidige waarde van de 'robot_description' parameter op.
+You simply requested the current value of the 'robot_description' parameter and stored it in *robot_description.urdf*.
 
-Bekijk de file die je hebt gemaakt:
+Open the file you have created:
 
     gedit robot_description.urdf
 
-Open ook nog eens de blocks.urdf file
+Also open the blocks.urdf file (from the *urdf_examples* package):
 
     gedit blocks.urdf
     
-Zie je verschil?
+Is there a difference?
 
-## Een mobiele robot modelleren
+## Modeling a mobile robot
 
-We gaan een mobiele robot bouwen, althans modelleren.
+We are going to build a mobile robot, or at least model it.
 
-Bekijk het model *mobile_robot.urdf.xacro* in een editor:
+View the model *mobile_robot.urdf.xacro* in an editor:
 
     gedit mobile_robot.urdf.xacro
 
-Visualiseer dit model:
+Visualize this model:
 
-    roslaunch urdf_tutorial xacrodisplay.launch model:=mobile_robot.urdf.xacro
+    roslaunch urdf_tutorial display.launch model:=mobile_robot.urdf.xacro
 
-Het model klopt niet. De wielen zitten niet goed aan de base. Maak dat in orde.
+The model is off, it's wheels aren't properly attached to the base. Correctly position the wheels.
 
-Heb je de wielen goed zitten? 
-Voeg dan de volgende regels aan je modelfile toe om een Kinect support steun en een Kinect aan het mobiele platform toe te voegen:
+Next, add a Kinect and it's support to your model by adding the following lines to your modelfile: 
 
     <joint name="kinect_support_joint" type="fixed">
       <parent link="base_link" />
@@ -167,11 +166,11 @@ Voeg dan de volgende regels aan je modelfile toe om een Kinect support steun en 
     <xacro:include filename="$(find turtlebot_description)/urdf/sensors/kinect.urdf.xacro"/>
     <sensor_kinect parent="base_link"/>
 
-Tenslotte start de visualisatie (opnieuw):
+Restart the visualization:
 
-    roslaunch urdf_tutorial xacrodisplay.launch model:=mobile_robot.urdf.xacro
+    roslaunch urdf_tutorial display.launch model:=mobile_robot.urdf.xacro
 
-Zet het vinkje bij TF uit om het model goed te zien. Als het goed is zit alles netjes aan elkaar. 
+Uncheck TF to get a good look of the model. If all went well, everything should fit together neatly.
 
 ## Stage simulatie
 
