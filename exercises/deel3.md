@@ -61,27 +61,25 @@ Open a new terminal and view the ROS Graph to see what was launched by the *disp
 
 ## Position a Link
 
-We gaan nu een robot met wat meer vorm bekijken. Open het model *block.urdf* in een editor:
+We are now going to look at a robot with a little more shape. Open the model *block.urdf* in an editor:
 
     gedit block.urdf
 
-Visualiseer in een \ndere terminal dit model in RViz:
+Open a new terminal to visualize this model in RViz (set *Fixed Frame* to *world*):
 
     roslaunch urdf_tutorial display.launch model:=block.urdf
 
-Selecteer *world* als *Fixed Frame*.
+As you can see, the model contains 1 block.
 
-Zoals je ziet bevat het model 1 blok.
+Uncheck *RobotModel* if you only want to see the TF output or uncheck *TF* if you only want to see the *RobotModel*.
 
-Zet het vinkje bij *RobotModel* uit als je alleen de TF output wilt zien of het vinkje bij *TF* als je alleen het *RobotModel* wilt zien.
+If you look closely, you will see that this block is not placed well on the ground (*world*). It is, as it were, half submerged. Why does this happen?
 
-Als je goed kijkt zie je dat dit blok niet goed op de grond (*world*) staat. Het is als het ware half verzonken. Waar komt daar door?
-
-Pas de URDF file aan zodat het blok goed op de grond komt te staan en start de visualisatie opnieuw.
+Adjust the URDF file, so that the block is properly placed on the ground, and restart the visualization.
 
 ## Links verbinden in URDF en URDF+XACRO model
 
-Bekijk nu het model *blocks.urdf* in een editor:
+View the model *blocks.urdf* in an editor:
 
     gedit blocks.urdf
 
