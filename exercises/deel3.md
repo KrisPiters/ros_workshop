@@ -133,7 +133,7 @@ Is there a difference?
 
 We are going to build a mobile robot, or at least model it.
 
-View the model *mobile_robot.urdf.xacro* in an editor:
+Open the modelfile *mobile_robot.urdf.xacro* in an editor:
 
     gedit mobile_robot.urdf.xacro
 
@@ -141,7 +141,8 @@ Visualize this model:
 
     roslaunch urdf_tutorial display.launch model:=mobile_robot.urdf.xacro
 
-The model is off, it's wheels aren't properly attached to the base. Correctly position the wheels.
+The model is off, it's wheels aren't properly attached to the base. 
+ - Correctly position the wheels.
 
 Next, add a Kinect and it's support to your model by adding the following lines to your modelfile: 
 
@@ -172,21 +173,25 @@ Restart the visualization:
 
 Uncheck TF to get a good look of the model. If all went well, everything should fit together neatly.
 
-## Stage simulatie
+## Stage simulation
 
-We hebben nu een leuk robot platform gemodelleerd maar kan het ook meebewegen met de echte of gesimuleerde robot?
+We have now modeled a nice robot platform, but can it also move together with a real or simulated robot?
 
-Laat de visulatiesatie draaien en start in een nieuwe terminal een gesimuleerde wereld in Stage:
+Keep the visualization running and start a simulated world in Stage from a new terminal:
 
     roslaunch stage_worlds kinect_world.launch
 
-Start in weer een andere terminal de *arbotix gui* om met je muis de robot te kunnen besturen:
+Set the Fixed Frame in RViz to *odom*.
 
-    arbotix_gui
+Start the *teleop_twist_keyboard* **OR** *mouse_teleop* node to control the robot:
 
-Als je de gesimuleerde robot laat bewegen zul je zien dat je robotmodel meebeweegt.
+    rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+    
+    roslaunch mouse_teleop mouse_teleop.launch mouse_vel:=cmd_vel
 
-## De mobiele robot krijgt een arm
+You will notice that the robot model moves together with the simulated robot (as the transformation between *base_link* and *odom* is being updated by Stage).
+
+## Adding an arm to the mobile robot
 
 Om onze mobile robot af te maken zetten we er nog een arm op. Voeg het volgende toe aan de model file:
 
