@@ -77,41 +77,38 @@ If you look closely, you will see that this block is not placed well on the grou
 
 Adjust the URDF file, so that the block is properly placed on the ground, and restart the visualization.
 
-## Links verbinden in URDF en URDF+XACRO model
+## Connecting Links in URDF and URDF+XACRO model
 
 View the model *blocks.urdf* in an editor:
 
     gedit blocks.urdf
 
-Maak een PDF file met een grafische representatie van het model and bekijk die:
+Create a PDF file with a graphic representation of the model and view it:
 
     urdf_to_graphiz blocks.urdf
     evince blocks.pdf
 
-Visualiseer dit model in RViZ:
+Visualize this model in RViZ (set *Fixed Frame* to *world*):
 
     roslaunch urdf_tutorial display.launch model:=blocks.urdf
 
-Selecteer *world* als *Fixed Frame*.
+You now see 3 blocks: a red one, a green one and a blue one.
 
-Je ziet nu 3 blokken: een rode, een groene en een blauwe.
+Uncheck the *RobotModel* and take a look at the *TF* output.
 
-Zet het vinkje bij *RobotModel* uit. En bekijk de TF output.
+Adjust the URDF file to stack the blocks, making sure the whole stack is placed neatly on the ground: the green block on top of the red block, the blue block on top of the green block. Relaunch RViz to visualize the model after you are (partly) done making adjustments.
 
-Pas de URDF file aan om de blokken op elkaar te stapelen: het groene blok op het rode en het blauwe op het groene.
-de stapel moet natuurlijk netjes op de grond komen te staan. Visualiseer (telkens) opnieuw als je (gedeeltelijk) klaar bent met aanpassen.
-
-Als dit gelukt is open het model *blocks.urdf.xacro*:
+If successful, open the model *blocks.urdf.xacro*:
 
     gedit blocks.urdf.xacro
 
-Pas ook dit URDF+XACRO model aan om de blokken netjes op elkaar te stapelen. Je zult merken dat dit veel minder werk is.
+Modify this URDF + XACRO model to neatly stack the blocks. You will notice that this is much less work.
 
-Als dit gelukt is, herstart dan de visualizatie met als extra de *gui:=true* optie:
+If successful in modifying the URDF + XACRO model, restart the visualization with the extra *gui:=true* parameter:
 
-    roslaunch urdf_tutorial xacrodisplay.launch model:=blocks.urdf.xacro gui:=true
+    roslaunch urdf_tutorial display.launch model:=blocks.urdf.xacro gui:=true
 
-Bedien de *schuifjes* en de *random* en *center* buttons in de GUI en zie wat er gebeurt.
+Adjust the *sliders* and press the *random* and *center* buttons in the GUI. Observe what happens to the visualisation.
 
 ## De robot_description parameter
 
