@@ -21,6 +21,9 @@ Install the required binary ROS packages:
     sudo apt-get install ros-kinetic-turtlebot
     sudo apt-get install ros-kinetic-gazebo-ros-pkgs
     sudo apt-get install ros-kinetic-gazebo-ros-control
+    sudo apt-get install ros-kinetic-joint-state-controller
+    sudo apt-get install ros-kinetic-effort-controllers
+    sudo apt-get install ros-kinetic-position-controllers
     sudo apt-get install ros-kinetic-moveit
     
 Install the [Gazebo demo package](https://github.com/ros-simulation/gazebo_ros_demos) and [turtlebot_arm](http://wiki.ros.org/turtlebot_arm?distro=kinetic) from source:
@@ -213,37 +216,35 @@ We will add an arm to complete our robot. Add the following to the model file (s
 
 Can we also move the arm?
 
-Restart visualization with the *gui:=true* option:
+Restart the visualization with the *gui:=true* option:
 
     roslaunch urdf_tutorial display.launch model:=mobile_robot.urdf.xacro gui:=true
 
-## Gazebo simulatie
+## Gazebo simulation
 
-Om met Gazebo te experimenteren gebruiken we de RRBot (Revolute-Revolute Manipulator Robot). RRBot is a simpele robot arm met 3 links en 2 joints.Het is in essentie een *double inverted pendulum*.
+To experiment with Gazebo we use the [RRBot](https://github.com/ros-simulation/gazebo_ros_demos) (Revolute-Revolute Manipulator Robot). RRBot is a simple robot arm with 3 links and 2 joints. It is essentially a *double inverted pendulum*.
 
-Bekijk het model
+Take a look at the modelfile for the robot:
 
     gedit `rospack find rrbot_description`/urdf/rrbot.xacro
 
-Start RRBot in Rviz om te kijken of het model werkt
+Start RRBot in RViz to see if the model works:
 
     roslaunch rrbot_description rrbot_rviz.launch
 
-Bedien de joints. Zoals je ziet is er in RViz geen zwaartekracht en alle bewegingen gaan oneindig snel.
+Control the joints. As you can see there is no gravity in RViz and all movements are infinitely fast.
 
-Start nu de RRBot in Gazebo:
+Next, start the RRBot in Gazebo (this may take a while):
 
     roslaunch rrbot_gazebo rrbot_world.launch
 
-De motoren van de joints zijn nog onbekrachtigd dus de zwaartekracht heeft vrij spel. Wacht af en kijk wat de zwaartekracht doet.
+The joints' motors are still unarmed, so gravity has free play. Wait and see what happens under the influence of gravity.
 
-Laad en start nu the joint position controllers:
+Load and start the joint position controllers:
 
-    rosservice call /rrbot/controller_manager/load_controller "name: 'joint1_position_controller'"
-    rosservice call /rrbot/controller_manager/load_controller "name: 'joint2_position_controller'"
-    rosservice call /rrbot/controller_manager/switch_controller "{start_controllers: ['joint1_position_controller','joint2_position_controller'], stop_controllers: [], strictness: 2}"
+    roslaunch rrbot_control rrbot_control.launch
 
-Gebruik bijvoorbeeld de volgende rostopic pub commando's om joint1 en/of joint 2 aan te sturen:
+Use the following commands as an example for controlling joint1 and/or joint2:
 
     rostopic pub -1 /rrbot/joint1_position_controller/command std_msgs/Float64 "data: 1.5"
     rostopic pub -1 /rrbot/joint2_position_controller/command std_msgs/Float64 "data: 1.0"
