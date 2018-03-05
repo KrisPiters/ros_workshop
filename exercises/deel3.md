@@ -251,17 +251,17 @@ Use the following commands as an example for controlling joint1 and/or joint2:
     
 ## MoveIt!
 
-We gaan motionplanning doen met de de arm van onze mobiele robot.
+Next, we are going to do motion planning with the arm of our mobile robot.
 
-Start MoveIt in RViz:
+Start [MoveIt](http://moveit.ros.org/) in RViz:
 
     roslaunch turtlebot_arm_moveit_config turtlebot_arm_moveit.launch sim:=true --screen
 
-Ga naar de tab *Planning*. Trek aan de interactieve markers om een doelpose (*Goal State*) te kiezen en druk dan op *Plan* om een traject te laten uitrekenen. Je kunt ook *<random>* een doelpose kiezen kiezen.
+Go to the *Planning* tab. Pull the interactive markers to select a target (*Goal State*), then press *Plan* to have a trajectory calculated. Finally press *Execute* to have the plan executed by the arm. 
 
-Als je hier bent heb je hopelijk geleerd hoe je zonder te programmeren toch veel met ROS kunt doen.
+If you are here, you have hopefully learned how to do a lot with ROS without any programming.
  
-## Referenties
+## References
 
 - [rviz userguide](http://wiki.ros.org/rviz/UserGuide)
 - [ROS Tutorials](http://wiki.ros.org/ROS/Tutorials)
@@ -273,3 +273,4 @@ Als je hier bent heb je hopelijk geleerd hoe je zonder te programmeren toch veel
 - [Specification for TurtleBot Compatible Platforms](http://www.ros.org/reps/rep-0119.html)
 - [Tutorial: Using a URDF in Gazebo](http://gazebosim.org/tutorials?tut=ros_urdf)
 - [Tutorial: ROS Control](http://gazebosim.org/tutorials/?tut=ros_control)
+- [MoveIt](http://moveit.ros.org/)
