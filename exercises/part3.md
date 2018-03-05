@@ -25,6 +25,7 @@ Install the required binary ROS packages:
     sudo apt-get install ros-kinetic-effort-controllers
     sudo apt-get install ros-kinetic-position-controllers
     sudo apt-get install ros-kinetic-moveit
+    sudo apt-get install ros-kinetic-yocs-math-toolkit
     
 Install the [Gazebo demo package](https://github.com/ros-simulation/gazebo_ros_demos) and [turtlebot_arm](http://wiki.ros.org/turtlebot_arm?distro=kinetic) from source:
 
