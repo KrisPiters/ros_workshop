@@ -193,19 +193,29 @@ You will notice that the robot model moves together with the simulated robot (as
 
 ## Adding an arm to the mobile robot
 
-Om onze mobile robot af te maken zetten we er nog een arm op. Voeg het volgende toe aan de model file:
+We will add an arm to complete our robot. Add the following to the model file (source: [*turtlebot_arm.urdf.xacro*](https://github.com/turtlebot/turtlebot_arm/tree/kinetic-devel/turtlebot_arm_description/urdf)):
 
-    <include filename="$(find turtlebot_arm_description)/urdf/arm.xacro" />
-    <turtlebot_arm parent="base_link" color="white" gripper_color="green"
-      joints_vlimit="${M_PI/2}" pan_llimit="-${M_PI/2}" pan_ulimit="${M_PI/2}">
+    <xacro:property name="joints_vlimit" value="1.571"/>
+    <xacro:property name="pan_llimit" value="-2.617"/>
+    <xacro:property name="pan_ulimit" value="2.617"/>
+    <xacro:property name="shoulder_llimit" value="-2.617"/>
+    <xacro:property name="shoulder_ulimit" value="2.617"/>
+    <xacro:property name="elbow_llimit" value="-2.617"/>
+    <xacro:property name="elbow_ulimit" value="2.617"/>
+    <xacro:property name="wrist_llimit" value="-1.745"/>
+    <xacro:property name="wrist_ulimit" value="1.745"/>
+    
+    <include filename="$(find turtlebot_arm_description)/urdf/turtlebot_arm.xacro" />
+    <turtlebot_arm parent="base_link" color="White" gripper_color="Green"
+                    pincher_gripper="false" turtlebot_gripper="true">
       <origin xyz="0.12 0 0.02"/>
     </turtlebot_arm>
 
-Kunnen we de arm ook bewegen?
+Can we also move the arm?
 
-Herstart visualisatie met de *gui:=true* optie: 
+Restart visualization with the *gui:=true* option:
 
-    roslaunch urdf_tutorial xacrodisplay.launch model:=mobile_robot.urdf.xacro gui:=true
+    roslaunch urdf_tutorial display.launch model:=mobile_robot.urdf.xacro gui:=true
 
 ## Gazebo simulatie
 
